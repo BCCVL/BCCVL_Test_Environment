@@ -1,3 +1,9 @@
 [submodule "BCCVL_Visualiser"]
 	path = BCCVL_Visualiser
 	url = https://github.com/BCCVL/BCCVL_Visualiser.git
+[submodule "org.bccvl.site"]
+	path = org.bccvl.site
+	url = https://github.com/BCCVL/org.bccvl.site.git
+[submodule "bccvl_buildout"]
+	path = bccvl_buildout
+	url = git@github.com:BCCVL/bccvl_buildout.git
