@@ -78,6 +78,7 @@ BCCVL Buildout:
     - name: /home/plone/bccvl_buildout/bin/buildout
     - require:
       - cmd: BCCVL Bootstrap Buildout
+      - service: 4store
     - watch:
       - git: BCCVL Buildout Clone
 
