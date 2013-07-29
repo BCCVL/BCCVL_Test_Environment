@@ -1,4 +1,5 @@
 
 base:
   'plone':
-    - bccvl
+    - bccvl.plone
+    - bccvl.users
