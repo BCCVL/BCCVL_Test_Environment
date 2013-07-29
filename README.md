@@ -19,7 +19,11 @@ ensures that your VMs guest additions are up to date - if you don't use this, yo
 need to manage the guest additions on your VMs yourself.
 
 		vagrant plugin install vagrant-vbguest
+		
+3. Install salty-vagrant plugin. (Unless already installed)
 
-3. Bring up the VMs:
+		vagrant plugin install vagrant-salt
+
+4. Bring up the VMs:
 
 		vagrant up
