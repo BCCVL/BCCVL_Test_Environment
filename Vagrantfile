@@ -23,6 +23,7 @@ Vagrant.configure("2") do |config|
   ##########################
   config.vm.define :plone do |plone|
       plone.vm.network :private_network, ip: "192.168.100.100"
+      plone.vm.hostname = "plone"
 
       plone.vm.provision :salt do |salt|
         salt.minion_config = "salt/plone_minion"
@@ -36,6 +37,7 @@ Vagrant.configure("2") do |config|
   ##########################
   config.vm.define :visualiser do |visualiser|
       visualiser.vm.network :private_network, ip: "192.168.100.101"
+      visualiser.vm.hostname = "visualiser"
 
       visualiser.vm.provision :salt do |salt|
         salt.minion_config = "salt/visualiser_minion"
