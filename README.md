@@ -14,12 +14,16 @@ This guide assumes you just freshly cloned this repo.
 
 		git submodule update --init
 
+   You can update all the submodules using the following command:
+
+		git submodule foreach git pull origin master
+
 2. Install vagrant guest additions plugin. This
 ensures that your VMs guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
 		vagrant plugin install vagrant-vbguest
-		
+
 3. Install salty-vagrant plugin. (Unless already installed)
 
 		vagrant plugin install vagrant-salt
