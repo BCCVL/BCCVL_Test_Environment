@@ -1,21 +1,22 @@
 
-
 4store:
   service:
     - running
     - enable: True
     - require:
       - pkg: Erpel Packages
-    - watch:
       - file: /etc/4store.conf
       - file: /etc/sysconfig/4store
+      - cmd: create bccvl 4store
 
 create bccvl 4store:
   cmd.run:
-    - unless: 4s-admin list-stores | grep bccvl
-    - name: 4s-admin create-store --segments 4 bccvl
+    - name: 4s-backend-setup --segments 2 bccvl
+    - user: fourstore
+    - group: fourstore
+    - unless: test -d /var/lib/4store/bccvl
     - require:
-      - service: 4store
+      - pkg: Erpel Packages
 
 /etc/4store.conf:
   file.append:
