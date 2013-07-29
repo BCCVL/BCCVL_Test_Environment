@@ -1,0 +1,3 @@
+
+mlocate:
+  pkg.installed

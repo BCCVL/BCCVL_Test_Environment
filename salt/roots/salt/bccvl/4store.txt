@@ -1,0 +1,10 @@
+4s-admin create-store --segments 4 bccvl
+
+add to /etc/4store.conf:
+
+[bccvl]
+port = 6801
+sot-lmit = 0
+
+add to /etc/sysconfig/4store
+auto start bccvl in both lists
