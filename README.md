@@ -36,7 +36,7 @@ need to manage the guest additions on your VMs yourself.
 you should restart it. This will ensure that all the necessary services are started
 correctly.
 
-		vagrant reload plone
+		vagrant halt plone && vagrant up plone
 
 
 Testing Plone
