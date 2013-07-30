@@ -23,11 +23,19 @@ Vagrant.configure("2") do |config|
   ##########################
   config.vm.define :plone do |plone|
       plone.vm.network :private_network, ip: "192.168.100.100"
+
+      # Overide default virtualbox config options
+      plone.vm.provider :virtualbox do |vb|
+        # Give the VM 2GB of memory
+        vb.customize ["modifyvm", :id, "--memory", "2048"]
+      end
+
       plone.vm.hostname = "plone"
 
       plone.vm.provision :salt do |salt|
         salt.minion_config = "salt/plone_minion"
         salt.run_highstate = true
+        salt.verbose = true
       end
   end
 
@@ -42,6 +50,7 @@ Vagrant.configure("2") do |config|
       visualiser.vm.provision :salt do |salt|
         salt.minion_config = "salt/visualiser_minion"
         salt.run_highstate = true
+        salt.verbose = true
       end
   end
 
