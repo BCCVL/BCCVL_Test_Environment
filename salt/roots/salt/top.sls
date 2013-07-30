@@ -2,4 +2,5 @@
 base:
   'plone':
     - bccvl
-
+  'visualiser':
+    - bccvl

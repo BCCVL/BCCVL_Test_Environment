@@ -14,7 +14,7 @@ security_shibboleth:
     - gpgcheck: 1
     - gpgkey: http://download.opensuse.org/repositories/security:/shibboleth/CentOS_CentOS-6/repodata/repomd.xml.key
     - enabled: 0
-    
+
 Install Epel Repository:
   pkg.installed:
     - sources:
@@ -24,7 +24,6 @@ Install Elgis Repository:
   pkg.installed:
     - sources:
       - elgis-release: http://elgis.argeo.org/repos/6/elgis-release-6-6_0.noarch.rpm
-
 
 ElGIS Packages:
   pkg.installed:
@@ -69,8 +68,11 @@ Erpel Packages:
 include:
   - bccvl.tools
   - bccvl.users
+{% if grains['id'] == 'plone' %}
   - bccvl.httpd
   - bccvl.4store
   - bccvl.supervisord
   - bccvl.plone
-
+{% elif grains['id'] == 'visualiser' %}
+  - bccvl.visualiser
+{% endif %}
