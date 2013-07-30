@@ -31,3 +31,36 @@ need to manage the guest additions on your VMs yourself.
 4. Bring up the VMs:
 
 		vagrant up
+
+5. Restart the Plone VM. Once the plone VM is up, and the provisioning is complete,
+you should restart it. This will ensure that all the necessary services are started
+correctly.
+
+		vagrant reload plone
+
+
+Testing Plone
+==========================
+
+Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
+Don't attempt these steps until provisioning is complete, and you have restarted the Plone VM.
+
+1. Log into the Plone VM:
+
+		vagrant ssh plone
+
+2. Switch to the plone user:
+
+		sudo su plone
+
+3. Start Plone:
+
+		cd ~/bccvl_buildout && ./bin/instance-debug fg
+
+4. Hit up plone in your browser (this can be from your local (host) machine):
+
+		http://localhost:80/
+
+
+Testing The Visualiser
+==========================
