@@ -59,7 +59,7 @@ Don't attempt these steps until provisioning is complete, and you have restarted
 
 4. Hit up plone in your browser (this can be from your local (host) machine):
 
-		http://localhost:80/
+		http://192.168.100.100/
 
 
 Testing The Visualiser
