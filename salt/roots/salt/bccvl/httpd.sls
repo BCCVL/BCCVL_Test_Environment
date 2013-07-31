@@ -1,14 +1,19 @@
 
 httpd:
-  pkg.installed:
-    - pkgs:
-      - httpd
-      - mod_ssl
+  pkg.installed
+
+mod_ssl:
+  pkg.installed
+
+httpd service:
   service:
     - running
+    - name: httpd
     - enable: True
     - require:
       - pkg: httpd
+      - pkg: mod_ssl
+      - file: /etc/httpd/conf.d/bccvl.conf
 
 iptables 80:
   module.run:
