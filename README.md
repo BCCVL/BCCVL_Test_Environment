@@ -43,7 +43,30 @@ Testing Plone
 ==========================
 
 Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
-Don't attempt these steps until provisioning is complete, and you have restarted the Plone VM.
+Don't attempt these steps until provisioning is complete, and you have restarted the Plone VM. The VM
+may need a few moments to start the httpd and supervisord services prior to your interaction.
+
+Note: In some cases, the VM can require multiple restarts. This is an issue in provisioning that is currently under investiagation.
+
+Once provisioning is successfully completed and the VM has started all necessary
+services, the VM will allow for interaction with a production instance environment at:
+
+		https://192.168.100.100/
+
+Once this URL responds with a Plone interface that has reference data sets, experiments, etc.
+you can be confident that your plone VM is ready, all the necessary services are running.
+
+Note: This production instance is behind a cache layer (varnish).
+
+
+Development Instance
+--------------------------
+
+The following describes how to interact with a development instance, which should be
+free of any cache layers. You should ensure that the production instance is responding
+before setting up the development instance. If you don't, your VM may not have all
+the necessary services running when you try start your development instance.
+
 
 1. Log into the Plone VM:
 
@@ -57,7 +80,7 @@ Don't attempt these steps until provisioning is complete, and you have restarted
 
 		cd ~/bccvl_buildout && ./bin/instance-debug fg
 
-4. Hit up plone in your browser (this can be from your local (host) machine):
+4. Hit the development instance of plone in your browser (this can be from your local _host_ machine):
 
 		http://192.168.100.100/
 
