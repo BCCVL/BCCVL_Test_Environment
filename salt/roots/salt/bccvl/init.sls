@@ -75,4 +75,6 @@ include:
   - bccvl.plone
 {% elif grains['id'] == 'visualiser' %}
   - bccvl.visualiser
+{% elif grains['id'] == 'data-mover' %}
+  - bccvl.data_mover
 {% endif %}

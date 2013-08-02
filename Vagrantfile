@@ -54,4 +54,19 @@ Vagrant.configure("2") do |config|
       end
   end
 
+
+  ##########################
+  #  DATA MOVER VM CONFIG  #
+  ##########################
+  config.vm.define :data_mover do |data_mover|
+      data_mover.vm.network :private_network, ip: "192.168.100.102"
+      data_mover.vm.hostname = "data-mover" # hostname can't contain underscores :(
+
+      data_mover.vm.provision :salt do |salt|
+        salt.minion_config = "salt/data_mover_minion"
+        salt.run_highstate = true
+        salt.verbose = true
+      end
+  end
+
 end
