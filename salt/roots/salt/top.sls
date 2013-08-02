@@ -4,3 +4,5 @@ base:
     - bccvl
   'visualiser':
     - bccvl
+  'data-mover':
+    - bccvl
