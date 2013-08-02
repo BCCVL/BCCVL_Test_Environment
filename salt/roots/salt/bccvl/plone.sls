@@ -90,6 +90,8 @@ BCCVL Buildout:
       - cmd: BCCVL Buildout
     - watch:
       - cmd: BCCVL Buildout
+    - watch_in:
+      - service: httpd
 
 /mnt/work:
   file.directory:
@@ -106,4 +108,6 @@ BCCVL Buildout:
     - target: /home/plone/bccvl_buildout/parts/supervisor/supervisord.conf
     - require:
       - pkg: supervisor
+    - watch_in:
+      - service: supervisord
 

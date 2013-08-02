@@ -13,7 +13,6 @@ httpd service:
     - require:
       - pkg: httpd
       - pkg: mod_ssl
-      - file: /etc/httpd/conf.d/bccvl.conf
 
 iptables 80:
   module.run:

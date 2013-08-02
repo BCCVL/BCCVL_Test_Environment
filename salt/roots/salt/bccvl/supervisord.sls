@@ -9,4 +9,3 @@ supervisord:
   service.enabled:
     - require:
       - pkg: supervisor
-
