@@ -32,21 +32,11 @@ need to manage the guest additions on your VMs yourself.
 
 		vagrant up
 
-5. Restart the Plone VM. Once the plone VM is up, and the provisioning is complete,
-you should restart it. This will ensure that all the necessary services are started
-correctly.
-
-		vagrant halt plone && sleep 10 && vagrant up plone
-
-
 Testing Plone
 ==========================
 
 Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
-Don't attempt these steps until provisioning is complete, and you have restarted the Plone VM. The VM
-may need a few moments to start the httpd and supervisord services prior to your interaction.
-
-Note: In some cases, the VM can require multiple restarts. This is an issue in provisioning that is currently under investiagation.
+The VM may take up to five minutes to start all the necessary services.
 
 Once provisioning is successfully completed and the VM has started all necessary
 services, the VM will allow for interaction with a production instance environment at:
