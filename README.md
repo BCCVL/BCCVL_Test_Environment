@@ -3,6 +3,7 @@ BCCVL_Test_Environment
 
 A series of scripts and Git submodules to allow for the automated generation of local VMs
 
+
 Getting Started
 =========================
 
@@ -10,27 +11,30 @@ Welcome... Let's get straight into it.
 
 This guide assumes you just freshly cloned this repo.
 
-1. You need to pull the submodules into this repo:
-
-		git submodule update --init
-
-   You can update all the submodules using the following command:
-
-		git submodule foreach git pull origin master
-
-2. Install vagrant guest additions plugin. This
-ensures that your VMs guest additions are up to date - if you don't use this, you'll
+1. Install vagrant guest additions plugin. This ensures that your VMs 
+guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
 		vagrant plugin install vagrant-vbguest
 
-3. Install salty-vagrant plugin. (Unless already installed)
+2. Install salty-vagrant plugin. (Unless already installed)
 
 		vagrant plugin install vagrant-salt
 
-4. Bring up the VMs:
+3. Bring up the VMs:
 
 		vagrant up
+
+
+VMs
+------------------
+
+| VM            | Vagrant VM Name  | IP              | Git Hub Repo                                      |
+| ------------- |:----------------:|:---------------:| -------------------------------------------------:|
+| Plone         | plone            | 192.168.100.100 | https://github.com/BCCVL/org.bccvl.site, et al.   |
+| Visualiser    | visualiser       | 192.168.100.101 | https://github.com/BCCVL/BCCVL_Visualiser         |
+| Data Manager  | data_manager     | 192.168.100.102 | https://github.com/BCCVL/bccvl_data_mover         |
+
 
 Testing Plone
 ==========================
