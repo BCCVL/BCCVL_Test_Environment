@@ -36,7 +36,10 @@ Testing Plone
 ==========================
 
 Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
-The VM may take up to five minutes to start all the necessary services.
+
+The VM may take up to five minutes to start all the necessary services. The apache service
+will start up relatively quickly, and then you will receive a
+503 status while the supervisord (plone) services are starting up.
 
 Once provisioning is successfully completed and the VM has started all necessary
 services, the VM will allow for interaction with a production instance environment at:
