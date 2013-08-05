@@ -103,3 +103,18 @@ Visualiser Buildout:
       - cmd: Visualiser Bootstrap Buildout
     - watch:
       - git: Visualiser Clone
+
+iptables 6543:
+  module.run:
+    - name: iptables.insert
+    - table: filter
+    - chain: INPUT
+    - position: 3
+    - rule: -p tcp --dport 6543 -j ACCEPT
+
+save iptables:
+  module.run:
+    - name: iptables.save
+    - filename: /etc/sysconfig/iptables
+    - require:
+      - module: iptables 6543
