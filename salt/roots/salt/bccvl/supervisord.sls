@@ -6,6 +6,8 @@ supervisor:
       - pkg: Install Epel Repository
 
 supervisord:
-  service.enabled:
+  service:
+    - running
+    - enable: True
     - require:
       - pkg: supervisor
