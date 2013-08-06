@@ -84,3 +84,24 @@ the necessary services running when you try start your development instance.
 
 Testing The Visualiser
 ==========================
+
+Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
+
+1. Log into the Visualiser VM:
+
+		vagrant ssh visualiser
+
+2. Switch to the visualiser user:
+
+		sudo su visualiser
+
+3. Start the visualiser:
+
+		cd ~/BCCVL_Visualiser/BCCVL_Visualiser/ && ./bin/pserve development.ini
+
+4. Hit the visualiser in your browser (this can be from your local _host_ machine):
+
+		http://192.168.100.101:6543/api.text
+
+Once this URL responds with a listing of the available visualiser apis, you can be
+confident that the visualiser is started.

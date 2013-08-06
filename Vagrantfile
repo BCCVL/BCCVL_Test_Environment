@@ -46,6 +46,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :visualiser do |visualiser|
       visualiser.vm.network :private_network, ip: "192.168.100.101"
       visualiser.vm.hostname = "visualiser"
+      config.vm.network :forwarded_port, guest: 6543, host: 6543
 
       visualiser.vm.provision :salt do |salt|
         salt.minion_config = "salt/visualiser_minion"
