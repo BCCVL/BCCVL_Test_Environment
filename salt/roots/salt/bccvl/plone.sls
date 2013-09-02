@@ -55,6 +55,8 @@ BCCVL Buildout Config:
       admin_user: {{ pillar['plone']['admin'] }}
       admin_password: {{ pillar['plone']['password'] }}
       site_hostname: {{ pillar['plone']['hostname'] }}
+      mr_developer_always_checkout: {{ pillar['plone']['mr_developer_always_checkout'] }}
+      site_replace: {{ pillar['plone']['site_replace'] }}
     - require:
       - git: BCCVL Buildout Clone
 
@@ -71,7 +73,7 @@ BCCVL Bootstrap Buildout:
       - pkg: Compute Requirements
 
 BCCVL Buildout:
-  cmd.wait:
+  cmd.run:
     - cwd: /home/plone/bccvl_buildout
     - user: plone
     - group: plone
@@ -79,7 +81,6 @@ BCCVL Buildout:
     - require:
       - cmd: BCCVL Bootstrap Buildout
       - service: 4store
-    - watch:
       - git: BCCVL Buildout Clone
 
 /etc/httpd/conf.d/bccvl.conf:
