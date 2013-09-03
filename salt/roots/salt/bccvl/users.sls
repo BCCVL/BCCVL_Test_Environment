@@ -6,7 +6,7 @@
     - createhome: true
     - shell: /bin/bash
     {% if args['groups'] %}
-    - groups: {{ args['groups'] }}
+    - groups: {{ args.get('groups', False) }}
     {% endif %}
 
   {% if args.get('key.pub', False) == True %}
@@ -18,4 +18,3 @@
       - user: {{ user }}
   {% endif %}
 {% endfor %}
-
