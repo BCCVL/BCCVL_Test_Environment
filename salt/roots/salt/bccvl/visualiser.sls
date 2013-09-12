@@ -42,7 +42,6 @@ Visualiser Clone:
     - name: https://github.com/BCCVL/BCCVL_Visualiser.git
     - target: /home/visualiser/BCCVL_Visualiser
     - runas: visualiser
-    - rev: add_combined_salt_buildout_support
     - require:
       - user: visualiser
       - pkg: Visualiser Requirements
