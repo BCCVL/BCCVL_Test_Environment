@@ -1,7 +1,8 @@
 plone:
+    hostname: 192.168.100.200
+
     admin: admin
     password: admin
-    hostname: 192.168.100.100
 
     # mr_developer_always_checkout
     #

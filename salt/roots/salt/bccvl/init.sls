@@ -77,4 +77,11 @@ include:
   - bccvl.visualiser
 {% elif grains['id'] == 'data-mover' %}
   - bccvl.data_mover
+{% elif grains['id'] == 'combined' %}
+  - bccvl.httpd
+  - bccvl.4store
+  - bccvl.supervisord
+  - bccvl.plone
+  - bccvl.visualiser
+  - bccvl.data_mover
 {% endif %}

@@ -1,3 +1,14 @@
+include:
+  - bccvl.iptables
+  - bccvl.supervisord
+  - bccvl.httpd
+
+stop supervisord:
+  service:
+    - dead
+    - require:
+      - pkg: supervisor
+
 Visualiser Requirements:
     pkg.installed:
       - pkgs:
@@ -17,6 +28,7 @@ Visualiser Requirements:
         - python27-devel
       - require:
         - pkgrepo: erpel
+        - service: stop supervisord
 
 visualiser:
   user.present:
@@ -30,6 +42,7 @@ Visualiser Clone:
     - name: https://github.com/BCCVL/BCCVL_Visualiser.git
     - target: /home/visualiser/BCCVL_Visualiser
     - runas: visualiser
+    - rev: add_combined_salt_buildout_support
     - require:
       - user: visualiser
       - pkg: Visualiser Requirements
@@ -76,6 +89,8 @@ Visualiser Buildout Config:
     - group: visualiser
     - mode: 640
     - template: jinja
+    - defaults:
+      site_hostname: {{ pillar['visualiser']['hostname'] }}
     - require:
       - git: Visualiser Clone
 
@@ -94,27 +109,48 @@ Visualiser Bootstrap Buildout:
       - file: Visualiser Buildout Config
 
 Visualiser Buildout:
-  cmd.wait:
+  cmd.run:
     - cwd: /home/visualiser/BCCVL_Visualiser/BCCVL_Visualiser
     - user: visualiser
     - group: visualiser
     - name: ./bin/buildout
     - require:
       - cmd: Visualiser Bootstrap Buildout
-    - watch:
       - git: Visualiser Clone
 
-iptables 6543:
-  module.run:
-    - name: iptables.insert
-    - table: filter
-    - chain: INPUT
-    - position: 3
-    - rule: -p tcp --dport 6543 -j ACCEPT
-
-save iptables:
-  module.run:
-    - name: iptables.save
-    - filename: /etc/sysconfig/iptables
+/etc/supervisord.d/visualiser.ini:
+  file.symlink:
+    - target: /home/visualiser/BCCVL_Visualiser/BCCVL_Visualiser/etc/supervisor.conf
     - require:
-      - module: iptables 6543
+      - pkg: supervisor
+    - watch:
+      - cmd: Visualiser Buildout
+    - watch_in:
+      - service: supervisord
+
+/home/visualiser/BCCVL_Visualiser/BCCVL_Visualiser/var/log:
+  file.directory:
+    - user: visualiser
+    - group: visualiser
+    - makedirs: True
+
+# Only link up the apache conf if we are building JUST the visualiser
+{% if grains['id'] == 'visualiser' %}
+
+/etc/httpd/conf.d/bccvl_visualiser.conf:
+  file.symlink:
+    - target: /home/visualiser/BCCVL_Visualiser/BCCVL_Visualiser/etc/apache.conf
+    - require:
+      - pkg: httpd
+    - watch:
+      - cmd: Visualiser Buildout
+    - watch_in:
+      - service: httpd
+
+{% else %}
+# Else, ensure the symlink is missing
+
+/etc/httpd/conf.d/bccvl_visualiser.conf:
+  file.absent
+
+{% endif %}

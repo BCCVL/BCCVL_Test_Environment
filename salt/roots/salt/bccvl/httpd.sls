@@ -1,3 +1,6 @@
+include:
+  - bccvl.iptables
+
 httpd:
   pkg:
     - installed
@@ -18,6 +21,8 @@ iptables 80:
     - chain: INPUT
     - position: 3
     - rule: -p tcp --dport 80 -j ACCEPT
+    - require_in:
+      - module: save iptables
 
 iptables 443:
   module.run:
@@ -26,11 +31,5 @@ iptables 443:
     - chain: INPUT
     - position: 3
     - rule: -p tcp --dport 443 -j ACCEPT
-
-save iptables:
-  module.run:
-    - name: iptables.save
-    - filename: /etc/sysconfig/iptables
-    - require:
-      - module: iptables 80
-      - module: iptables 443
+    - require_in:
+      - module: save iptables

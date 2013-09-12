@@ -1,4 +1,3 @@
-
 Plone Requirements:
     pkg.installed:
       - pkgs:
@@ -36,6 +35,7 @@ plone:
 BCCVL Buildout Clone:
   git.latest:
     - name: https://github.com/BCCVL/bccvl_buildout.git
+    - rev: add_combined_salt_buildout_support
     - target: /home/plone/bccvl_buildout
     - runas: plone
     - require:

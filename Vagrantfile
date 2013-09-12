@@ -79,4 +79,27 @@ Vagrant.configure("2") do |config|
       end
   end
 
+  ##########################
+  #   COMBINED VM CONFIG   #
+  ##########################
+  config.vm.define :combined do |combined|
+      combined.vm.network :private_network, ip: "192.168.100.200"
+      combined.vm.hostname = "combined"
+
+      # Overide default virtualbox config options
+      combined.vm.provider :virtualbox do |vb|
+        # Give the VM 2GB of memory
+        vb.customize ["modifyvm", :id, "--memory", "2048"]
+      end
+
+      combined.vm.provision :salt do |salt|
+        salt.minion_config = "salt/combined_minion"
+        salt.run_highstate = true
+        salt.verbose = true
+
+        salt.install_type = 'git'
+        salt.install_args = 'v0.16.0'
+      end
+  end
+
 end

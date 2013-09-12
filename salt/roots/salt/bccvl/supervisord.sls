@@ -1,5 +1,3 @@
-
-
 supervisor:
   pkg.installed:
     - require:

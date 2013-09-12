@@ -6,3 +6,5 @@ base:
     - bccvl
   'data-mover':
     - bccvl
+  'combined':
+    - bccvl
