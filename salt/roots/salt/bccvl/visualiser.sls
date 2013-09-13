@@ -3,12 +3,6 @@ include:
   - bccvl.supervisord
   - bccvl.httpd
 
-stop supervisord:
-  service:
-    - dead
-    - require:
-      - pkg: supervisor
-
 Visualiser Requirements:
     pkg.installed:
       - pkgs:
@@ -28,7 +22,6 @@ Visualiser Requirements:
         - python27-devel
       - require:
         - pkgrepo: erpel
-        - service: stop supervisord
 
 visualiser:
   user.present:
@@ -52,6 +45,7 @@ Get Virtual Env:
     - user: visualiser
     - group: visualiser
     - cwd: /tmp/
+    - unless: test -d /home/visualiser/BCCVL_Visualiser/env
 
 Extract Virtual Env:
   cmd.wait:
