@@ -12,3 +12,8 @@ Data Mover Requirements:
         - python27-devel
       - require:
         - pkgrepo: erpel
+
+include:
+  - bccvl.tools
+  - bccvl.users
+  - bccvl.base
