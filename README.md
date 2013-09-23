@@ -11,7 +11,7 @@ Welcome... Let's get straight into it.
 
 This guide assumes you just freshly cloned this repo.
 
-1. Install vagrant guest additions plugin. This ensures that your VMs 
+1. Install vagrant guest additions plugin. This ensures that your VMs
 guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
@@ -118,3 +118,102 @@ Note: This assumes you have finished the getting started steps, your VM is up, a
 You can be confident the data_mover is up if you receive something like the following:
 
 		{'status': 'PENDING', 'id': 1}
+
+Once this URL responds with a listing of the available visualiser apis, you can be
+confident that the visualiser is started.
+
+
+Deploying with salt-master and salt-minion on same machine
+==========================================================
+
+1. Bootstrap latest stable salt (see https://github.com/saltstack/salt-bootstrap )
+
+    `wget -O - http://bootstrap.saltstack.org | sudo sh`
+
+    or install a specific version
+
+    `curl -L http://bootstrap.saltstack.org | sudo sh -s -- git v0.16.0`
+
+2. Install salt-master
+
+    `yum install salt-master`
+
+3. Configure salt-master
+
+   It helps to configure a separate environment. below is a snippet to
+   configure an envirnoment named demo.
+
+    ```yaml
+    file_roots:
+      base:
+        - /srv/salt
+      demo:
+        - /srv/salt/demo
+
+    pillar_roots:
+      base:
+        - /srv/pillar
+      demo:
+        - /srv/pillar/dem
+    ```
+4. Make sure the minion will look for the master on localhost
+
+   add an entry like ```127.0.0.1 salt``` into /etc/hosts or change
+   the salt-minion configuration.
+
+5. setup salt directory structure and clone BCCVL_Test_Environment
+
+    ```sh
+    mkdir -p /srv/salt/compute
+    mkdir -p /srv/pillar/compute
+    cd /srv
+    git clone https://github.com/BCCVL/BCCVL_Test_Environment.git
+    ln -s /srv/BCCVL_Test_Environment/salt/roots/salt/users /srv/salt/demo/users
+    ln -s /srv/BCCVL_Test_Environment/salt/roots/salt/bccvl /srv/salt/demo/bccvl
+    ```
+
+6. configure top.sls and pillars
+
+    /srv/salt/top.sls
+    ```yaml
+    demo:
+      'hostname':
+        - bccvl.combined
+    ```
+
+    ```sh
+    cp -r /srv/BCCVL_Test_Environment/salt/roots/pillar/bccvl /srv/pillar/demo/
+    ```
+
+    /srv/pillar/top.sls
+    ```yaml
+    demo:
+      'hostname':
+        - bccvl.users
+        - bccvl.plone
+        - bccvl.python
+        - bccvl.virtualenv
+        - bccvl.visualiser
+    ```
+
+    edit /srv/pillar/demo/bccvl/*.sls to your needs and place
+    required ssh pubkeys into /srv/salt/demo/users
+
+7. enable and restart salt-master, salt-minion and accept key
+
+    ```sh
+    chkconfig --add salt-master
+    chkconfig --add salt-minion
+    service salt-mastert restart
+    service salt-minion restart
+    salt-key -A
+    ```
+
+8. Run salt to set up machine
+
+    ```sh
+    # check sls files
+    salt 'hostname' state.highstate test=True
+    # run for real
+    salt 'hostname' state.highstate
+    ```
