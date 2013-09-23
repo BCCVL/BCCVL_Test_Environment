@@ -42,8 +42,6 @@ ElGIS Packages:
 EPEL Packages:
   pkg.installed:
     - pkgs:
-      - salt
-      - salt-minion
       - geos
       - geos-devel
     - require:
