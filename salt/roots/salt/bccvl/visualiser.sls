@@ -20,6 +20,7 @@ Visualiser Requirements:
         - libjpeg-turbo-devel
         - lapack-devel
         - python27-devel
+        - wget
       - require:
         - pkgrepo: erpel
 
@@ -46,6 +47,9 @@ Get Virtual Env:
     - group: visualiser
     - cwd: /tmp/
     - unless: test -d /home/visualiser/BCCVL_Visualiser/env
+    - require:
+      - user: visualiser
+      - pkg: Visualiser Requirements
 
 Extract Virtual Env:
   cmd.wait:
