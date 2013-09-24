@@ -101,11 +101,51 @@ Data Mover Buildout:
       - cmd: Data Mover Bootstrap Buildout
       - git: Data Mover Clone
 
+/etc/supervisord.d/data_mover.ini:
+  file.symlink:
+    - target: /home/data_mover/bccvl_data_mover/data_mover/etc/supervisor.conf
+    - require:
+      - pkg: supervisor
+    - watch:
+      - cmd: Data Mover Buildout
+    - watch_in:
+      - service: supervisord
+
+/home/data_mover/bccvl_data_mover/data_mover/var/log:
+  file.directory:
+    - user: data_mover
+    - group: data_mover
+    - makedirs: True
+
+# Only link up the apache conf if we are building JUST the data_mover
+{% if grains['id'] == 'data-mover' %}
+
+/etc/httpd/conf.d/bccvl_data_mover.conf:
+  file.symlink:
+    - target: /home/data_mover/bccvl_data_mover/data_mover/etc/apache.conf
+    - require:
+      - pkg: httpd
+    - watch:
+      - cmd: Data Mover Buildout
+    - watch_in:
+      - service: httpd
+
+{% else %}
+# Else, ensure the symlink is missing
+
+/etc/httpd/conf.d/bccvl_data_mover.conf:
+  file.absent
+
+{% endif %}
+
 include:
   - bccvl.tools
   - bccvl.users
   - bccvl.base
   - bccvl.postgresql
+  - bccvl.iptables
+  - bccvl.supervisord
+  - bccvl.httpd
 
 extend:
   Source PostgreSQL into PATH:
