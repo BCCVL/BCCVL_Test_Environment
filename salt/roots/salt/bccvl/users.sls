@@ -5,7 +5,7 @@
     - uid: {{ args['uid'] }}
     - createhome: true
     - shell: /bin/bash
-    {% if args['groups'] %}
+    {% if args.get('groups', Fales) %}
     - groups: {{ args.get('groups', False) }}
     {% endif %}
 
