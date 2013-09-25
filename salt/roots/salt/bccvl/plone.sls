@@ -18,6 +18,7 @@ Compute Requirements:
       - R-devel
       - gcc
       - make
+      - gdal
       - gdal-devel
       - proj-devel
       - proj-epsg
