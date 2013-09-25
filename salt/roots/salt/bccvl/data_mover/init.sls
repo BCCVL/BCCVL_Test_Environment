@@ -24,9 +24,15 @@ data_mover:
     - gid_from_name: true
   postgres_user.present:
     - runas: postgres
-    - password: pillar['data_mover']['postgres_password']
+    - password: {{ pillar['data_mover']['postgres_password'] }}
     - require:
       - cmd: Init postgresql-9.3
+      - service: postgresql-9.3
+  postgres_database.present:
+    - runas: postgres
+    - owner: data_mover
+    - require:
+      - postgres_user: data_mover
       - service: postgresql-9.3
 
 /home/data_mover/tmp:
@@ -100,6 +106,17 @@ Data Mover Buildout:
     - require:
       - cmd: Data Mover Bootstrap Buildout
       - git: Data Mover Clone
+
+Data Mover Init DB:
+  cmd.wait:
+    - cwd: /home/data_mover/bccvl_data_mover/data_mover/
+    - user: data_mover
+    - group: data_mover
+    - name: ./bin/initialize_data_mover_db {{ pillar['data_mover']['deploy_ini'] }}
+    - require:
+      - postgres_database: data_mover
+    - watch:
+      - cmd: Data Mover Bootstrap Buildout
 
 /etc/supervisord.d/data_mover.ini:
   file.symlink:

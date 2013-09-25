@@ -36,3 +36,6 @@ nosetests.xml
 
 # Vagrant
 .vagrant
+
+# Ignore swp files (like vim swp files)
+*.swp
