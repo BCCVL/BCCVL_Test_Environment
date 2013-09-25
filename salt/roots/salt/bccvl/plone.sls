@@ -1,6 +1,9 @@
 Plone Requirements:
     pkg.installed:
       - pkgs:
+        - gcc
+        - gcc-c++
+        - make
         - git
         - subversion
         - mercurial
@@ -16,9 +19,6 @@ Compute Requirements:
   pkg.installed:
     - pkgs:
       - R-devel
-      - gcc
-      - make
-      - gdal
       - gdal-devel
       - proj-devel
       - proj-epsg
