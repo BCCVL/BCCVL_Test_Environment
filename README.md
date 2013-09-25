@@ -52,7 +52,7 @@ will start up relatively quickly, and then you will receive a
 Once provisioning is successfully completed and the VM has started all necessary
 services, the VM will allow for interaction with a production instance environment at:
 
-		https://192.168.100.100/
+		https://192.168.100.200/
 
 Once this URL responds with a Plone interface that has reference data sets, experiments, etc.
 you can be confident that your plone VM is ready, all the necessary services are running.
@@ -71,7 +71,7 @@ the necessary services running when you try start your development instance.
 
 1. Log into the Plone VM:
 
-		vagrant ssh plone
+		vagrant ssh combined
 
 2. Switch to the plone user:
 
@@ -83,7 +83,7 @@ the necessary services running when you try start your development instance.
 
 4. Hit the development instance of plone in your browser (this can be from your local _host_ machine):
 
-		http://192.168.100.100/
+		https://192.168.100.200/_debug/bccvl
 
 
 Testing The Visualiser
@@ -91,21 +91,30 @@ Testing The Visualiser
 
 Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
 
-1. Log into the Visualiser VM:
+1. Hit the visualiser in your browser (this can be from your local _host_ machine):
 
-		vagrant ssh visualiser
-
-2. Switch to the visualiser user:
-
-		sudo su visualiser
-
-3. Start the visualiser:
-
-		cd ~/BCCVL_Visualiser/BCCVL_Visualiser/ && ./bin/pserve development.ini
-
-4. Hit the visualiser in your browser (this can be from your local _host_ machine):
-
-		http://192.168.100.101:6543/api.text
+		http://192.168.100.200/_visualiser/api.text
 
 Once this URL responds with a listing of the available visualiser apis, you can be
 confident that the visualiser is started.
+
+Testing The Data Mover
+==========================
+
+Note: This assumes you have finished the getting started steps, your VM is up, and has already been fully provisioned.
+
+1. start an interactive python prompt
+
+		python
+
+2. run the following python
+
+		from xmlrpclib import ServerProxy
+		s = ServerProxy('http://192.168.100.200/_data_mover/data_mover')
+		lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
+		lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
+		s.pullOccurrenceFromALA(lsid)
+
+You can be confident the data_mover is up if you receive something like the following:
+
+		{'status': 'PENDING', 'id': 1}
