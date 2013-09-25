@@ -45,7 +45,6 @@ data_mover:
 Data Mover Clone:
   git.latest:
     - name: https://github.com/BCCVL/bccvl_data_mover.git
-    - rev: convert_to_buildout
     - target: /home/data_mover/bccvl_data_mover
     - runas: data_mover
     - require:
