@@ -29,11 +29,15 @@ need to manage the guest additions on your VMs yourself.
 VMs
 ------------------
 
+The following are the different VMs that we support. Unless you have special
+requirements, just use the combined VM.
+
 | VM            | Vagrant VM Name  | IP              | Git Hub Repo                                      |
 | ------------- |:----------------:|:---------------:| -------------------------------------------------:|
 | Plone         | plone            | 192.168.100.100 | https://github.com/BCCVL/org.bccvl.site, et al.   |
 | Visualiser    | visualiser       | 192.168.100.101 | https://github.com/BCCVL/BCCVL_Visualiser         |
 | Data Manager  | data_manager     | 192.168.100.102 | https://github.com/BCCVL/bccvl_data_mover         |
+| Combined      | combined         | 192.168.100.200 | N/A                                               |
 
 
 Testing Plone
