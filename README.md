@@ -21,9 +21,9 @@ need to manage the guest additions on your VMs yourself.
 
 		vagrant plugin install vagrant-salt
 
-3. Bring up the VMs:
+3. Bring up the combined VM:
 
-		vagrant up
+		vagrant up combined
 
 
 VMs
