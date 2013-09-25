@@ -4,6 +4,7 @@ Plone Requirements:
         - gcc
         - gcc-c++
         - make
+        - gdal
         - git
         - subversion
         - mercurial
