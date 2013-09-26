@@ -28,6 +28,8 @@ Install Elgis Repository:
 ElGIS Packages:
   pkg.installed:
     - pkgs:
+      - postgis
+      - postgis-client
       - proj-epsg
       - proj-nad
       - proj-devel
