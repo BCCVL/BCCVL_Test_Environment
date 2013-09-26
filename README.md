@@ -11,6 +11,9 @@ Welcome... Let's get straight into it.
 
 This guide assumes you just freshly cloned this repo.
 
+Linux / Mac instructions
+-----------------------------
+
 1. Install vagrant guest additions plugin. This ensures that your VMs
 guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
@@ -25,6 +28,69 @@ need to manage the guest additions on your VMs yourself.
 
 		vagrant up combined
 
+Once this is done, you will need to manually seed the plone site.
+
+Ask Robert how to do this... I'll add instructions here later.
+
+Windows instructions
+-----------------------------
+
+1. Install vagrant guest additions plugin. This ensures that your VMs
+guest additions are up to date - if you don't use this, you'll
+need to manage the guest additions on your VMs yourself.
+
+		C:\...\vagrant\embedded\bin\gem.bat install vagrant-vbguest
+		# Where C:\...\ is the path to your programs folder (or wherever you installed it to)
+
+2. Install salty-vagrant plugin.
+
+		C:\...\vagrant\embedded\bin\gem.bat install vagrant-salt
+		# Where C:\...\ is the path to your programs folder (or wherever you installed it to)
+
+3. Bring up the combined VM:
+
+		vagrant up combined
+
+4. Provision the combined VM:
+
+		vagrant provision combined
+
+Once this is done, you will need to manually seed the plone site.
+
+Ask Robert how to do this... I'll add instructions here later.
+
+Re-Provision (Every OS)
+----------------
+
+When you want to update your VM, you have two options:
+
+**Incremental**:
+
+This will update your VM, in most cases, this is all you should need to do.
+
+1. Update this repo
+
+		git pull
+
+2. Re-provision
+
+		vagrant up combined && vagrant provision combined
+
+**From Scratch**:
+
+If you have provisions with the Incremental update, you can always do a clean install from scratch.
+
+1. Update this repo
+
+		git pull
+
+2. Destroy the VM
+
+		vagrant destroy combined
+
+3. Bring up a new VM
+
+		vagrant up combined
 
 VMs
 ------------------
