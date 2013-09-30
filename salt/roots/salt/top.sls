@@ -1,10 +1,10 @@
 # 'base' is an environment, don't worry about it for now.
 base:
   'plone':
-    - bccvl
+    - bccvl.repository
   'visualiser':
-    - bccvl
+    - bccvl.visualiser
   'data-mover':
-    - bccvl
+    - bccvl.data_mover
   'combined':
-    - bccvl
+    - bccvl.combined

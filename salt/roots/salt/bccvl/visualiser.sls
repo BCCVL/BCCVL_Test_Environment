@@ -1,4 +1,7 @@
 include:
+  - bccvl.tools
+  - bccvl.users
+  - bccvl.base
   - bccvl.iptables
   - bccvl.supervisord
   - bccvl.httpd
