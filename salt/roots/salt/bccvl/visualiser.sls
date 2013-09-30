@@ -51,8 +51,7 @@ visualiser:
 
 Visualiser Clone:
   git.latest:
-#    - name: https://github.com/BCCVL/BCCVL_Visualiser.git
-    - name: /vagrant/BCCVL_Visualiser
+    - name: https://github.com/BCCVL/BCCVL_Visualiser.git
     - target: /home/visualiser/BCCVL_Visualiser
     - runas: visualiser
     - require:
