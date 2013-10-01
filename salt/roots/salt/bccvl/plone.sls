@@ -41,7 +41,6 @@ BCCVL Buildout Clone:
   git.latest:
     - name: https://github.com/BCCVL/bccvl_buildout.git
     - target: /home/plone/bccvl_buildout
-    - rev: add_data_mover_to_apache
     - runas: plone
     - require:
       - user: plone
