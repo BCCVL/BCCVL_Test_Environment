@@ -114,6 +114,8 @@ BCCVL Buildout:
     - target: /home/plone/bccvl_buildout/parts/supervisor/supervisord.conf
     - require:
       - pkg: supervisor
+    - watch:
+      - cmd: BCCVL Buildout
     - watch_in:
       - service: supervisord
 

@@ -1,31 +1,25 @@
-Install PostgreSQL Repository:
-  pkg.installed:
-    - sources:
-      - pgdg-centos93: http://yum.postgresql.org/9.3/redhat/rhel-6-x86_64/pgdg-centos93-9.3-1.noarch.rpm
-
 Install PostgreSQL Packages:
   pkg.installed:
     - pkgs:
-      - postgresql93-devel
-      - postgresql93-server
-    - require:
-      - pkg: Install PostgreSQL Repository
+      - postgresql-devel
+      - postgresql-server
 
-Init postgresql-9.3:
+Init postgresql:
   cmd.wait:
-    - name: service postgresql-9.3 initdb
+    - name: service postgresql initdb
+    - user: root
     - watch:
       - pkg: Install PostgreSQL Packages
     - watch_in:
-      - service: postgresql-9.3
+      - service: postgresql
 
-postgresql-9.3:
+postgresql:
   service:
     - running
     - enable: True
 
 # Change postgresql to allow md5 authentication
-/var/lib/pgsql/9.3/data/pg_hba.conf:
+/var/lib/pgsql/data/pg_hba.conf:
   file.managed:
     - source:
       - salt://bccvl/postgresql/pg_hba.conf
@@ -33,9 +27,9 @@ postgresql-9.3:
     - group: postgres
     - mode: 600
     - require:
-      - cmd: Init postgresql-9.3
+      - cmd: Init postgresql
     - watch_in:
-      - service: postgresql-9.3
+      - service: postgresql
 
 /etc/profile.d/postgresql_path.sh:
   file.managed:

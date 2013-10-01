@@ -26,14 +26,14 @@ data_mover:
     - runas: postgres
     - password: {{ pillar['data_mover']['postgres_password'] }}
     - require:
-      - cmd: Init postgresql-9.3
-      - service: postgresql-9.3
+      - cmd: Init postgresql
+      - service: postgresql
   postgres_database.present:
     - runas: postgres
     - owner: data_mover
     - require:
       - postgres_user: data_mover
-      - service: postgresql-9.3
+      - service: postgresql
 
 /home/data_mover/tmp:
   file.directory:
