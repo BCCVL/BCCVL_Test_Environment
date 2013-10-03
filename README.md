@@ -78,7 +78,7 @@ This will update your VM, in most cases, this is all you should need to do.
 
 **From Scratch**:
 
-If you have provisions with the Incremental update, you can always do a clean install from scratch.
+If you have problems with the Incremental update, you can always do a clean install from scratch.
 
 1. Update this repo
 
