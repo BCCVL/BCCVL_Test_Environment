@@ -185,8 +185,6 @@ You can be confident the data_mover is up if you receive something like the foll
 
 		{'status': 'PENDING', 'id': 1}
 
-Once this URL responds with a listing of the available visualiser apis, you can be
-confident that the visualiser is started.
 
 
 Deploying with salt-master and salt-minion on same machine
