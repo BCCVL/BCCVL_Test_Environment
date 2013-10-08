@@ -10,7 +10,7 @@ pushd /tmp
     git clone https://github.com/BCCVL/BCCVL_Test_Environment.git test_env
     pushd test_env
         # start the test environment VMs
-        vagrant up
+        vagrant up combined
 
         # give the VMs some time to get their business in order
         sleep "$SLEEP_TIME_AFTER_UP"
