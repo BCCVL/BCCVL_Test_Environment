@@ -32,7 +32,56 @@ Once this is done, you will need to manually seed the plone site.
 
 Ask Robert how to do this... I'll add instructions here later.
 
-Windows instructions
+Windows instructions - Option 1 - Should always work
+---------------------------------------------------------
+
+1. Install vagrant guest additions plugin. This ensures that your VMs
+guest additions are up to date - if you don't use this, you'll
+need to manage the guest additions on your VMs yourself.
+
+		vagrant plugin install vagrant-vbguest
+
+2. Install salty-vagrant plugin. (Unless already installed)
+
+		vagrant plugin install vagrant-salt
+
+3. Bring up the combined VM. You might get an error saying you tried
+to interact with a machine that was not ready for guest interactions. Ignore
+this error.
+
+		vagrant up combined
+
+4. SSH into the VM:
+
+		vagrant ssh combined
+
+5. Install git onto the VM::
+
+		sudo yum install git
+
+6. Install Salt onto the VM:
+
+		curl -L http://bootstrap.saltstack.org | sudo sh -s -- git v0.16.0
+
+7. Clone this repo onto the VM:
+
+		cd ~ && git clone https://github.com/BCCVL/BCCVL_Test_Environment.git
+
+8. Put the salt files in the right spot:
+
+		sudo rm -rf /srv /etc/salt/minion &&
+		sudo ln -s ~/BCCVL_Test_Environment/salt/combined_minion  /etc/salt/minion &&
+		sudo ln -s ~/BCCVL_Test_Environment/salt/roots/ /srv
+
+9. Provision with salt:
+
+		sudo salt-call state.highstate
+
+Once this is done, you will need to manually seed the plone site.
+
+Ask Robert how to do this... I'll add instructions here later.
+
+Windows instructions - Option 2 - Easier, but may not work
 -----------------------------
 
 1. Install vagrant guest additions plugin. This ensures that your VMs
