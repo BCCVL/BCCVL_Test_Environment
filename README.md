@@ -77,6 +77,14 @@ this error.
 
 		sudo salt-call state.highstate
 
+Note you may see some errors when provisioning, if this happens, you need to halt the VM, restart the VM, and re-provision.
+**Only do this if necessary** (exit out of the VM prior to running these commands):
+
+		vagrant halt combined &&
+		vagrant up combined &&
+		vagrant ssh combined &&
+		sudo salt-call state.highstate		
+
 Once this is done, you will need to manually seed the plone site.
 
 Ask Robert how to do this... I'll add instructions here later.
