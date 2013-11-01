@@ -24,13 +24,29 @@ need to manage the guest additions on your VMs yourself.
 
 		vagrant plugin install vagrant-salt
 
-3. Bring up the combined VM:
+3. Install the openstack-vagrant plugin to support running on NeCTAR
+
+        vagrant plugin install vagrant-openstack-plugin
+
+4. Bring up the combined VM:
 
 		vagrant up combined
 
 Once this is done, you will need to manually seed the plone site.
 
 Ask Robert how to do this... I'll add instructions here later.
+
+Bring up the combined VM on NeCTAR
+---------------------------------------------------------
+
+See this page on how to configure your credentials in the Vagrant File:
+
+        https://bitbucket.org/stevecassidy/vagrant-nectar-cloud
+
+Bring up the VM:
+
+        vagrant up nectar_bccvl_combined --provider=openstack
+
 
 Windows instructions - Option 1 - Should always work
 ---------------------------------------------------------
