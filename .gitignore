@@ -39,3 +39,15 @@ nosetests.xml
 
 # Ignore swp files (like vim swp files)
 *.swp
+.idea/.name
+.idea/BCCVL_Test_Environment.iml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/other.xml
+.idea/scopes/scope_settings.xml
+.idea/testrunner.xml
+.idea/vcs.xml
+.idea/workspace.xml
+end_to_end_tests/.Python
+end_to_end_tests/ghostdriver.log
