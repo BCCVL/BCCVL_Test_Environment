@@ -10,7 +10,6 @@ Vagrant.configure("2") do |config|
   #    UNIVERSAL CONFIG    #
   ##########################
 
-
   config.vm.synced_folder "salt/roots/", "/srv/"
 
 
@@ -116,28 +115,77 @@ Vagrant.configure("2") do |config|
   #################################
   #   NECTAR COMBINED VM CONFIG   #
   #################################
+  #
+  # Dependencies
+  # ----------------------------
+  #
+  # 1. vagrant plugin install vagrant-salt
+  # 2. vagrant plugin install vagrant-openstack-plugin
+  #
+  #
+  # Controlling the open stack VM
+  # -----------------------------
+  #
+  # To start the VM:
+  #     vagrant up nectar_bccvl_combined --provider=openstack
+  #
+  # To destroy the VM:
+  #     vagrant destroy nectar_bccvl_combined
+  #
+  # To re-provision an already up VM:
+  #     vagrant provision nectar_bccvl_combined
+  #
+  # To halt (stop) the VM:
+  #     vagrant halt nectar_bccvl_combined
+  #
+  #
+  # Configuring the VM
+  # ----------------------
+  #
+  # You'll need to change:
+  #
+  # os.username -> your nectar email
+  #
+  # os.api_key -> your nectar API key
+  #
+  #     Go to settings in Nectar, and click reset password.
+  #     This will generate your API Key
+  #
+  # os.keypair_name -> The keypair you intend to use
+  #
+  #     The one you added for your current machine.
+  #
+  # os.tenant -> Your Nectar project
+  #
+  #     Probably pt-####
+  #
+  # os.security_groups -> The security groups you intend to use
+  #
+  #     Make sure you at least have ssh and rsync open.
+  #
   config.vm.define :nectar_bccvl_combined do |nectar_bccvl_combined|
 
-    nectar_bccvl_combined.vm.box = "dummy"
+    # The box isn't used (hence it's just a dummy box)
+    nectar_bccvl_combined.vm.box     = "dummy"
     nectar_bccvl_combined.vm.box_url = "https://github.com/cloudbau/vagrant-openstack-plugin/raw/master/dummy.box"
 
     nectar_bccvl_combined.ssh.private_key_path = "~/.ssh/id_rsa"
 
     nectar_bccvl_combined.vm.provider :openstack do |os|
-      os.username = "daniel@intersect.org.au"
-      os.api_key = "MjExM2JmNDYxNWVkMjIz"
-      os.flavor = /m1.small/
-      os.image = "0debdc10-1eeb-4239-8177-3e756c2758c9"
-      os.endpoint = "https://keystone.rc.nectar.org.au:5000/v2.0/tokens"
-      os.keypair_name = "key"
+      # Change these...
+      os.username     = "YOUR_EMAIL@uni.edu.au"
+      os.api_key      = "YOUR_API_KEY"
+      os.keypair_name = "YOUR KEYPAIR NAME"
+      os.tenant       = "pt-####"
+
+      os.flavor       = /m1.small/
+      os.image        = "0debdc10-1eeb-4239-8177-3e756c2758c9"
+      os.endpoint     = "https://keystone.rc.nectar.org.au:5000/v2.0/tokens"
       os.ssh_username = "ec2-user"
 
-      os.security_groups = ['ssh', 'http', 'icmp', 'rsync']
-      os.tenant = "pt-3847"
+      os.security_groups   = ['ssh', 'http', 'icmp', 'rsync']
       os.availability_zone = "monash"
     end
-
-#    nectar_bccvl_combined.vm.provision "shell", inline: "sudo rm -rf /srv /etc/salt/minion && sudo ln -s /vagrant/salt/combined_minion /etc/salt/minion && sudo ln -s /vagrant/salt/roots/ /srv"
 
     nectar_bccvl_combined.vm.provision :salt do |salt|
       salt.minion_config = "salt/combined_minion"
@@ -148,5 +196,5 @@ Vagrant.configure("2") do |config|
       salt.install_args = 'v0.16.0'
     end
   end
-  
+
 end
