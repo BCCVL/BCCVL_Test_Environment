@@ -12,6 +12,8 @@ Data Mover Requirements:
         - tk-devel
         - python27-devel
         - wget
+        - sqlite
+        - sqlite-devel
       - require:
         - pkgrepo: erpel
 
