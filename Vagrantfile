@@ -135,8 +135,13 @@ Vagrant.configure("2") do |config|
   # To re-provision an already up VM:
   #     vagrant provision nectar_bccvl_combined
   #
-  # To halt (stop) the VM:
-  #     vagrant halt nectar_bccvl_combined
+  # To restart the VM:
+  #     vagrant ssh nectar_bccvl_combined
+  #     reboot
+  #
+  # To shutown the VM:
+  #     vagrant ssh nectar_bccvl_combined
+  #     shutdown now
   #
   #
   # Configuring the VM
