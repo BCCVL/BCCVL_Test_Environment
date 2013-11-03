@@ -137,11 +137,11 @@ Vagrant.configure("2") do |config|
   #
   # To restart the VM:
   #     vagrant ssh nectar_bccvl_combined
-  #     reboot
+  #     sudo reboot
   #
   # To shutown the VM:
   #     vagrant ssh nectar_bccvl_combined
-  #     shutdown now
+  #     sudo shutdown now
   #
   #
   # Configuring the VM
