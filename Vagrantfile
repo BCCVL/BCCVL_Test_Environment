@@ -178,13 +178,13 @@ Vagrant.configure("2") do |config|
 
     nectar_bccvl_combined.vm.provider :openstack do |os|
       # Change these...
-      os.username     = "YOUR_EMAIL@uni.edu.au"
-      os.api_key      = "YOUR_API_KEY"
-      os.keypair_name = "YOUR KEYPAIR NAME"
-      os.tenant       = "pt-####"
+      os.username     = "#{ENV['NECTAR_BCCVL_COMBINED_USERNAME']}"
+      os.api_key      = "#{ENV['NECTAR_BCCVL_COMBINED_API_KEY']}"
+      os.keypair_name = "#{ENV['NECTAR_BCCVL_COMBINED_KEYPAIR']}"
+      os.tenant       = "#{ENV['NECTAR_BCCVL_COMBINED_TENANT']}"
 
       os.flavor       = /m1.small/
-      os.image        = "0debdc10-1eeb-4239-8177-3e756c2758c9"
+      os.image        = "0debdc10-1eeb-4239-8177-3e756c2758c9" # Public snapshot 'bccvl_clean' (which is 'NeCTAR CentOS 6.4 x86_64' + rsync)
       os.endpoint     = "https://keystone.rc.nectar.org.au:5000/v2.0/tokens"
       os.ssh_username = "ec2-user"
 
