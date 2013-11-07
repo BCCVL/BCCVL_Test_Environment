@@ -39,6 +39,7 @@ Visualiser Requirements:
         - blas-devel
         - lapack-devel
         - subversion
+        - gcc-c++
       - require:
         - pkgrepo: erpel
         - pkg: Install Elgis Repository
