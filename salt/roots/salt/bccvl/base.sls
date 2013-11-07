@@ -55,10 +55,7 @@ Shibboleth Packages:
       - pkgrepo: security_shibboleth
       - pkgrepo: erpel
 
-Erpel Packages:
+python27:
   pkg.installed:
-    - pkgs:
-      - python27
-      - 4store
     - require:
       - pkgrepo: erpel
