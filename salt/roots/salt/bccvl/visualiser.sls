@@ -40,6 +40,7 @@ Visualiser Requirements:
         - lapack-devel
         - subversion
         - gcc-c++
+        - make
       - require:
         - pkgrepo: erpel
         - pkg: Install Elgis Repository
