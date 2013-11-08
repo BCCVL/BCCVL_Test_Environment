@@ -1,10 +1,13 @@
 
 4store:
+  pkg.installed:
+    - require:
+      - pkgrepo: erpel
   service:
     - running
     - enable: True
     - require:
-      - pkg: Erpel Packages
+      - pkg: 4store
       - file: /etc/4store.conf
       - file: /etc/sysconfig/4store
       - cmd: create bccvl 4store
@@ -16,7 +19,7 @@ create bccvl 4store:
     - group: fourstore
     - unless: test -d /var/lib/4store/bccvl
     - require:
-      - pkg: Erpel Packages
+      - pkg: 4store
 
 /etc/4store.conf:
   file.append:
@@ -25,7 +28,7 @@ create bccvl 4store:
         port = 6801
         soft-lmit = 0
     - require:
-      - pkg: Erpel Packages
+      - pkg: 4store
 
 /etc/sysconfig/4store:
   file.managed:
@@ -34,5 +37,4 @@ create bccvl 4store:
     - group: root
     - mode: 640
     - require:
-      - pkg: Erpel Packages
-
+      - pkg: 4store
