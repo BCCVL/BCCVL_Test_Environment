@@ -51,6 +51,37 @@ visualiser:
     - shell: /bin/bash
     - createhome: true
     - gid_from_name: true
+  ssh_auth:
+    - present
+    - user: visualiser
+    - names:
+      - {{ pillar['sshkeys']['data_mover']['pubkey'] }}
+
+/home/visualiser/.ssh:
+  file.directory:
+    - user: visualiser
+    - group: visualiser
+    - mode: 0700
+    - require:
+      - user: visualiser
+
+/home/visualiser/.ssh/id_rsa:
+  file.managed:
+    - user: visualiser
+    - group: visualiser
+    - mode: 0600
+    - contents_pillar: sshkeys:visualiser:privkey
+    - require:
+      - file: /home/visualiser/.ssh
+
+/home/visualiser/.ssh/id_rsa.pub:
+  file.managed:
+    - user: visualiser
+    - group: visualiser
+    - mode: 0600
+    - contents_pillar: sshkeys:visualiser:pubkey
+    - require:
+      - file: /home/visualiser/.ssh
 
 Visualiser Clone:
   git.latest:

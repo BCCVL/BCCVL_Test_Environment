@@ -24,8 +24,37 @@ data_mover:
     - shell: /bin/bash
     - createhome: true
     - gid_from_name: true
+  ssh_known_hosts.present:
+    - name: localhost
+    - user: data_mover
     - require:
+      - user: data_mover
+
+/home/data_mover/.ssh:
+  file.directory:
+    - user: data_mover
+    - group: data_mover
+    - mode: 0700
     - require:
+      - user: data_mover
+
+/home/data_mover/.ssh/id_rsa:
+  file.managed:
+    - user: data_mover
+    - group: data_mover
+    - mode: 0600
+    - contents_pillar: sshkeys:data_mover:privkey
+    - require:
+      - file: /home/data_mover/.ssh
+
+/home/data_mover/.ssh/id_rsa.pub:
+  file.managed:
+    - user: data_mover
+    - group: data_mover
+    - mode: 0600
+    - contents_pillar: sshkeys:data_mover:pubkey
+    - require:
+      - file: /home/data_mover/.ssh
 
 /home/data_mover/tmp:
   file.directory:
