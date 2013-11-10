@@ -24,18 +24,8 @@ data_mover:
     - shell: /bin/bash
     - createhome: true
     - gid_from_name: true
-  postgres_user.present:
-    - runas: postgres
-    - password: {{ pillar['data_mover']['postgres_password'] }}
     - require:
-      - cmd: Init postgresql
-      - service: postgresql
-  postgres_database.present:
-    - runas: postgres
-    - owner: data_mover
     - require:
-      - postgres_user: data_mover
-      - service: postgresql
 
 /home/data_mover/tmp:
   file.directory:
@@ -93,7 +83,6 @@ Data Mover Bootstrap Buildout:
     - name: ./env/bin/python bootstrap.py
     - require:
       - cmd: Data Mover Extract Virtual Env
-      - cmd: Source PostgreSQL into PATH
       - cmd: Install Data Mover Virtual Env
     - watch:
       - git: Data Mover Clone
@@ -114,8 +103,6 @@ Data Mover Init DB:
     - user: data_mover
     - group: data_mover
     - name: ./bin/initialize_data_mover_db {{ pillar['data_mover']['deploy_ini'] }}
-    - require:
-      - postgres_database: data_mover
     - watch:
       - cmd: Data Mover Bootstrap Buildout
 
@@ -160,13 +147,6 @@ include:
   - bccvl.tools
   - bccvl.users
   - bccvl.base
-  - bccvl.postgresql
   - bccvl.iptables
   - bccvl.supervisord
   - bccvl.httpd
-
-extend:
-  Source PostgreSQL into PATH:
-    cmd:
-      - user: data_mover
-      - group: data_mover
