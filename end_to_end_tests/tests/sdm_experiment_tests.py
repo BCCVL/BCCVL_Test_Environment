@@ -10,6 +10,7 @@ class PloneTest(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.get(config.BASE_URL)
+        self.driver.maximize_window()
 
     def test_create__bioclim_experiment(self):
         plone_homepage = PloneHomepage(self.driver)
@@ -34,6 +35,9 @@ class PloneTest(unittest.TestCase):
 
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
+        view_experiment_page.check_text_displayed("New Experiment")
+
+
 
     def tearDown(self):
         self.driver.close()
