@@ -36,6 +36,45 @@ plone:
     - shell: /bin/bash
     - createhome: true
     - gid_from_name: true
+  ssh_auth:
+    - present
+    - user: plone
+    - names:
+      - {{ pillar['sshkeys']['data_mover']['pubkey'] }}
+      - {{ pillar['sshkeys']['plone']['pubkey'] }}
+    - require:
+      - user: plone
+  ssh_known_hosts.present:
+    - name: localhost
+    - user: plone
+    - require:
+      - user: plone
+
+/home/plone/.ssh:
+  file.directory:
+    - user: plone
+    - group: plone
+    - mode: 0700
+    - require:
+      - user: plone
+
+/home/plone/.ssh/id_rsa:
+  file.managed:
+    - user: plone
+    - group: plone
+    - mode: 0600
+    - contents_pillar: sshkeys:plone:privkey
+    - require:
+      - file: /home/plone/.ssh
+
+/home/plone/.ssh/id_rsa.pub:
+  file.managed:
+    - user: plone
+    - group: plone
+    - mode: 0600
+    - contents_pillar: sshkeys:plone:pubkey
+    - require:
+      - file: /home/plone/.ssh
 
 BCCVL Buildout Clone:
   git.latest:
@@ -117,4 +156,3 @@ BCCVL Buildout:
       - cmd: BCCVL Buildout
     - watch_in:
       - service: supervisord
-
