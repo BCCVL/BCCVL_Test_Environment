@@ -1,5 +1,5 @@
 plone:
-    hostname: 192.168.100.200
+    hostname: {{ grains['ipv4'][0] }}
 
     admin: admin
     password: admin
