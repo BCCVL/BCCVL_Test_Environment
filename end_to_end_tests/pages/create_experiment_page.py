@@ -39,6 +39,12 @@ class CreateExperimentPage(BasePage):
     def select_occurrences_data_for_abt(self):
         self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-0").click()
 
+    def select_absences_data_for_abt(self):
+        self.driver.find_element_by_id("form-widgets-species_absence_dataset-0").click()
+
+    def select_current_climate_layers(self):
+        self.driver.find_element_by_id("form-widgets-environmental_dataset-0").click()
+
     def select_review_start_experiment(self):
         self.driver.find_element_by_name("form.buttons.save").click()
         view_experiment_page = ViewExperimentPage(self.driver)

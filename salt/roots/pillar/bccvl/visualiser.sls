@@ -1,3 +1,3 @@
 visualiser:
-    hostname: 192.168.100.200
+    hostname: 127.0.0.1
     # hostname: 118.138.241.217 # daniel B's nectar VM

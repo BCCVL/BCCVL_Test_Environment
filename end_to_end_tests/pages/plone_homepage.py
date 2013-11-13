@@ -16,5 +16,3 @@ class PloneHomepage(BasePage):
         bccvl_homepage = BCCVLHomepage(self.driver)
         return bccvl_homepage
 
-    def close(self):
-        self.driver.close()
