@@ -1,2 +1,2 @@
 visualiser:
-    hostname: {{ grains['ipv4'][0] }}
+    hostname: 127.0.0.1
