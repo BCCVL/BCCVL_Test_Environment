@@ -188,7 +188,7 @@ Vagrant.configure("2") do |config|
       os.endpoint     = "https://keystone.rc.nectar.org.au:5000/v2.0/tokens"
       os.ssh_username = "ec2-user"
 
-      os.security_groups   = ['default', 'Griffith', 'Intersect', 'UQ']
+      os.security_groups   = ['default', 'Griffith', 'Intersect', 'UQ', 'Jenkins']
       os.availability_zone = "monash"
     end
 
