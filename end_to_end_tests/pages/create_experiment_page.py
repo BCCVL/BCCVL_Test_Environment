@@ -36,6 +36,9 @@ class CreateExperimentPage(BasePage):
     def select_sdm_algorithm_bioclim(self):
         self.driver.find_element_by_id("form-widgets-functions-0").click()
 
+    def select_sdm_algorithm_brt(self):
+        self.driver.find_element_by_id("form-widgets-functions-1").click()
+
     def select_occurrences_data_for_abt(self):
         self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-0").click()
 
@@ -46,6 +49,22 @@ class CreateExperimentPage(BasePage):
         self.driver.find_element_by_id("form-widgets-environmental_dataset-0").click()
 
     def select_review_start_experiment(self):
-        self.driver.find_element_by_name("form.buttons.save").click()
+        self.driver.find_element_by_xpath("(//button[@name='form.buttons.save'])[2]").click()
         view_experiment_page = ViewExperimentPage(self.driver)
         return view_experiment_page
+
+    def select_submit_invalid_experiment(self):
+        self.driver.find_element_by_xpath("(//button[@name='form.buttons.save'])[2]").click()
+
+    def enter_ala_search_string(self,string):
+        self.driver.find_element_by_name("searchOccurrence_query").clear()
+        self.driver.find_element_by_name("searchOccurrence_query").send_keys(string)
+
+    def select_ala_dataset_to_download(self,string):
+        self.driver.find_element_by_link_text(string).click()
+
+    def check_description_tab_displayed(self):
+        assert self.driver.find_element_by_name("form.widgets.IDublinCore.title").displayed?
+        assert self.driver.find_element_by_name("form.widgets.IDublinCore.description").displayed == 1
+
+
