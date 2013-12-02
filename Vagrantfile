@@ -183,12 +183,12 @@ Vagrant.configure("2") do |config|
       os.keypair_name = "#{ENV['NECTAR_BCCVL_COMBINED_KEYPAIR']}"
       os.tenant       = "#{ENV['NECTAR_BCCVL_COMBINED_TENANT']}"
 
-      os.flavor       = /m1.small/
+      os.flavor       = /m1.medium/
       os.image        = "0debdc10-1eeb-4239-8177-3e756c2758c9" # Public snapshot 'bccvl_clean' (which is 'NeCTAR CentOS 6.4 x86_64' + rsync)
       os.endpoint     = "https://keystone.rc.nectar.org.au:5000/v2.0/tokens"
       os.ssh_username = "ec2-user"
 
-      os.security_groups   = ['ssh', 'http', 'icmp', 'rsync']
+      os.security_groups   = ['default', 'Griffith', 'Intersect', 'UQ', 'Jenkins']
       os.availability_zone = "monash"
     end
 
