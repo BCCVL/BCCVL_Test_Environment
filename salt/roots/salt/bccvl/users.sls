@@ -2,6 +2,7 @@
 {% for user, args in pillar.get('users', {}).items() %}
 {{ user }}:
   user.present:
+    - fullname: {{ args['fullname'] }}
     - uid: {{ args['uid'] }}
     - createhome: true
     - shell: /bin/bash
