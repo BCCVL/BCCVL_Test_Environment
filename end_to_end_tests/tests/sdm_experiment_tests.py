@@ -1,14 +1,15 @@
 import unittest
 from selenium import webdriver
-import end_to_end_tests.config as config
 from selenium.webdriver.support.ui import WebDriverWait
 import tempfile
+import os
 from end_to_end_tests.pages.plone_homepage import PloneHomepage
 
 
 class SDMExperimentTests(unittest.TestCase):
 
     def setUp(self):
+
         fp = webdriver.FirefoxProfile()
 
         temp_dir = tempfile.mkdtemp()
@@ -18,11 +19,11 @@ class SDMExperimentTests(unittest.TestCase):
         fp.set_preference("browser.helperApps.neverAsk.saveToDisk", "application/zip")
         fp.set_preference("browser.download.folderList", 2)
         self.driver = webdriver.Firefox(firefox_profile=fp)
-        self.driver.get(config.BASE_URL)
+        self.driver.get(os.environ['URL'])
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
 
-    def test_sdm_experiment_ensure_mandatory_fields_enforced(self):
+    def test_sdm_experiment_ensure_mandatory_experiment_name_enforced(self):
 
         plone_homepage = PloneHomepage(self.driver)
         self.assertEqual(u'Welcome to BCCVL \u2014 Plone site', plone_homepage.title)
@@ -32,10 +33,12 @@ class SDMExperimentTests(unittest.TestCase):
         self.assertEqual("BCCVL Experiment List", experiment_homepage.title)
         create_experiment_page = experiment_homepage.click_new_sdm_experiment()
         self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
-        create_experiment_page.select_review()
+        create_experiment_page.select_run()
         create_experiment_page.select_submit_invalid_experiment()
-        create_experiment_page.check_text_displayed("There were some errors.")
-        create_experiment_page.check_description_tab_displayed()
+        self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
+        create_experiment_page.check_text_displayed("Please supply a descriptive name for this experiment.")
+
+       # create_experiment_page.check_description_tab_displayed()
         #in progress
 
     def test_create_bioclim_experiment(self):
@@ -81,7 +84,6 @@ class SDMExperimentTests(unittest.TestCase):
         view_experiment_page.check_text_displayed("dismo.eval.object.RData")
         view_experiment_page.check_text_displayed("biomod2_like_VariableImportance.csv")
 
-
     def test_create_brt_experiment(self):
 
         plone_homepage = PloneHomepage(self.driver)
@@ -110,7 +112,6 @@ class SDMExperimentTests(unittest.TestCase):
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 1600)
         #in progress
 
-
     def test_download_occurrence_dataset_from_ala(self):
 
         plone_homepage = PloneHomepage(self.driver)
@@ -129,8 +130,6 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.enter_ala_search_string("Dingo Monster")
         create_experiment_page.select_ala_dataset_to_download("(species) Cooloola dingo Dingo Monster")
 #in progress
-
-
 
     def tearDown(self):
         self.driver.close()

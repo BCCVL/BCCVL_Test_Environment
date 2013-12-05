@@ -24,6 +24,11 @@ class CreateExperimentPage(BasePage):
         self.driver.find_element_by_link_text("Review").click()
         self.driver.implicitly_wait(100)
 
+    def select_run(self):
+        self.driver.find_element_by_link_text("Run").click()
+        self.driver.implicitly_wait(100)
+
+
     def enter_experiment_name(self, name):
         self.driver.find_element_by_name("form.widgets.IDublinCore.title").clear()
         self.driver.find_element_by_name("form.widgets.IDublinCore.title").send_keys(name)
@@ -32,6 +37,7 @@ class CreateExperimentPage(BasePage):
         self.driver.find_element_by_name("form.widgets.IDublinCore.description").clear()
         self.driver.find_element_by_name("form.widgets.IDublinCore.description").send_keys(description)
         self.driver.implicitly_wait(100)
+
 
     def select_sdm_algorithm_bioclim(self):
         self.driver.find_element_by_id("form-widgets-functions-0").click()
@@ -64,7 +70,7 @@ class CreateExperimentPage(BasePage):
         self.driver.find_element_by_link_text(string).click()
 
     def check_description_tab_displayed(self):
-        assert self.driver.find_element_by_name("form.widgets.IDublinCore.title").displayed?
-        assert self.driver.find_element_by_name("form.widgets.IDublinCore.description").displayed == 1
+        self.driver.find_element_by_xpath(self.driver.find_element_by_xpath)
+        self.driver.find_element_by_link_text("Configuration")
 
 
