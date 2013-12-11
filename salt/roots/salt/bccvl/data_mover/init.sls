@@ -14,6 +14,7 @@ Data Mover Requirements:
         - wget
         - sqlite
         - sqlite-devel
+        - gcc # required by pysqlite
       - require:
         - pkgrepo: erpel
 
@@ -150,6 +151,11 @@ Data Mover Init DB:
     - user: data_mover
     - group: data_mover
     - makedirs: True
+    - require:
+      - user: data_mover
+      - cmd: Data Mover Buildout
+    - require_in:
+      - service: supervisord
 
 # Only link up the apache conf if we are building JUST the data_mover
 {% if grains['id'] == 'data-mover' %}
