@@ -174,6 +174,8 @@ Visualiser Buildout:
     - makedirs: True
     - require:
       - git: Visualiser Clone
+    - require_in: 
+      - service: supervisord
 
 
 # Only link up the apache conf if we are building JUST the visualiser
