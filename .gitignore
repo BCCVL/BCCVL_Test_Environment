@@ -51,3 +51,6 @@ nosetests.xml
 .idea/workspace.xml
 end_to_end_tests/.Python
 end_to_end_tests/ghostdriver.log
+*.slsc
+salt/roots/pillar/bccvl.sshkeys
+salt/roots/pillar/bccvl.ssl
