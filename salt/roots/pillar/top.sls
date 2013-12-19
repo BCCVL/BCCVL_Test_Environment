@@ -1,9 +1,15 @@
 
 base:
   'plone':
+    - bccvl.httpd
+    - bccvl.ssl
+    - bccvl.supervisord
     - bccvl.plone
     - bccvl.users
     - bccvl.sshkeys
+    # include all pillars as they are needed for httpd config
+    - bccvl.visualiser
+    - bccvl.data_mover
   'visualiser':
     - bccvl.visualiser
     - bccvl.virtualenv

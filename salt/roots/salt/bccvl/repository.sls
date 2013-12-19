@@ -1,4 +1,5 @@
 include:
+  - bccvl.ssl
   - bccvl.tools
   - bccvl.users
   - bccvl.base

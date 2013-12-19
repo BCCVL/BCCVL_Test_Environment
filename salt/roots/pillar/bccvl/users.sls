@@ -7,4 +7,5 @@
 #    groups: 
 #      - wheel
 #    key.pub: True
+#    shibid: someid
 

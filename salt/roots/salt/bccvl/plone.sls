@@ -126,17 +126,6 @@ BCCVL Buildout:
       - service: 4store
       - git: BCCVL Buildout Clone
 
-/etc/httpd/conf.d/bccvl.conf:
-  file.symlink:
-    - target: /home/plone/bccvl_buildout/etc/apache.conf
-    - require:
-      - pkg: httpd
-      - cmd: BCCVL Buildout
-    - watch:
-      - cmd: BCCVL Buildout
-    - watch_in:
-      - service: httpd
-
 /mnt/work:
   file.directory:
     - user: plone

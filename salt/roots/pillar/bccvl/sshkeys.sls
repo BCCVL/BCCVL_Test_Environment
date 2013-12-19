@@ -32,7 +32,7 @@ def debug_env():
 
 def run():
     config = {'sshkeys': {}}
-    keydir = os.path.join(__opts__['pillar_roots'][__env__][0], __sls__.replace('.',os.path.pathsep))
+    keydir = os.path.join(__opts__['pillar_roots'][__env__][0], __sls__.replace(':',os.path.pathsep))
     if not os.path.exists(keydir):
         os.mkdir(keydir, 0700)
     for user in ('data_mover', 'visualiser', 'plone'):
