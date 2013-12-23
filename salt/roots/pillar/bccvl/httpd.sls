@@ -5,7 +5,7 @@
 {% elif grains['os'] == 'CentOs' %}
 {% set hostname = grains['ip_interfaces']['eth0'][0] %}
 {% else %}
-{% set hostname = grains['ipv4'][1] if grains['ipv4'][0] == '127.0.0.1' else grains['ip4v'][0] %}
+{% set hostname = grains['ipv4'][1] if grains['ipv4'][0] == '127.0.0.1' else grains['ipv4'][0] %}
 {% endif %}
 {# grains['virtual'] == 'VirtualBox', 'kvm' (Nectar), 'physical' (laptop) #}
 
