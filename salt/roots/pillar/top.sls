@@ -21,6 +21,8 @@ base:
     - bccvl.python
     - bccvl.sshkeys
   'combined':
+    - bccvl.httpd
+    - bccvl.ssl
     - bccvl.plone
     - bccvl.visualiser
     - bccvl.users
