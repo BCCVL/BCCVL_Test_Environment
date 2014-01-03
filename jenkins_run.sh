@@ -35,6 +35,4 @@ export URL="http://$IP"
 ./bin/nosetests --with-xunit
 TEST_RESULT=$?
 
-RESULT = $TEST_RESULT
-
-exit $RESULT
+exit $TEST_RESULT
