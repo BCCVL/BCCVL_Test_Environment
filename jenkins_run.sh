@@ -8,6 +8,8 @@ sleep 30
 
 # Bring up the combined vm
 vagrant up nectar_bccvl_combined --provider=openstack
+VAGRANT_RESULT=$?
+echo "VAGRANT_RESULT = $VAGRANT_RESULT"
 
 echo "Sleeping for 30 seconds"
 sleep 30
