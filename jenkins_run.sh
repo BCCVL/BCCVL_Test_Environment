@@ -20,5 +20,20 @@ echo "Determined IP address: $IP"
 #echo "Restarting the combined VM"
 #vagrant reload nectar_bccvl_combined --provider=openstack
 
-
 # Run tests
+# Setup the Selenium tests
+cd end_to_end_tests
+virtualenv .
+./bin/pip install distribute --upgrade
+./bin/pip install -r requirements.txt
+
+# Set the environment attribute URL for test
+export URL="http://$IP"
+
+# Run the test and output the results in XML
+./bin/nosetests --with-xunit
+TEST_RESULT=$?
+
+RESULT = $TEST_RESULT
+
+exit $RESULT
