@@ -1,5 +1,5 @@
 {# TODO: could add my own grain to detect deployment env and decide for ext interface or try to discover real hostname #}
-{% if grains['productname'] == 'VirtualBox' %}
+{% if grains.get('productname', '') == 'VirtualBox' %}
 {% set hostname = grains['ip_interfaces']['eth1'][0] %}
 {% elif grains['os'] == 'CentOS' %}
 {% set hostname = grains['ip_interfaces']['eth0'][0] %}
