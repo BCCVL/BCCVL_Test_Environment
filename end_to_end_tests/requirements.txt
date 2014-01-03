@@ -1,3 +1,5 @@
 selenium
 nose
 coverage
+pyvirtualdisplay
+xvfbwrapper

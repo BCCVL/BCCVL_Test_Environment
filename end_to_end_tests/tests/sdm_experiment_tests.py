@@ -1,4 +1,5 @@
 import unittest
+from pyvirtualdisplay import Display
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 import tempfile
@@ -9,6 +10,9 @@ from end_to_end_tests.pages.plone_homepage import PloneHomepage
 class SDMExperimentTests(unittest.TestCase):
 
     def setUp(self):
+
+        self.display = Display(visible=0, size=(800, 600))
+        self.display.start()
 
         fp = webdriver.FirefoxProfile()
 
@@ -133,3 +137,4 @@ class SDMExperimentTests(unittest.TestCase):
 
     def tearDown(self):
         self.driver.close()
+        self.display.stop()
