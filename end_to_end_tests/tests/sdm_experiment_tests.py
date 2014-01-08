@@ -11,7 +11,7 @@ class SDMExperimentTests(unittest.TestCase):
 
     def setUp(self):
 
-        self.display = Display(visible=0, size=(1024, 768))
+        self.display = Display(visible=0, size=(1920, 1080))
         self.display.start()
 
         fp = webdriver.FirefoxProfile()
