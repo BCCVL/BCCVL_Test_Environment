@@ -6,4 +6,5 @@ include:
   - bccvl.httpd
   - bccvl.4store
   - bccvl.supervisord
+  - bccvl.shibd
   - bccvl.plone
