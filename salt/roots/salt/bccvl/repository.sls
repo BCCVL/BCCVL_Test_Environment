@@ -9,3 +9,4 @@ include:
   - bccvl.shibd
   - bccvl.plone
   - bccvl.varnish
+  - bccvl.haproxy

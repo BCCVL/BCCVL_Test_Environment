@@ -174,3 +174,15 @@ BCCVL Buildout:
       - file: /etc/varnish/bccvl.vcl
     - watch_in:
       - service: varnish
+
+/etc/haproxy/haproxy.cfg:
+  file.managed:
+    - source: salt://bccvl/haproxy.cfg
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
+    - requires:
+      - pkg: haproxy
+    - watch_in:
+      - service: haproxy
