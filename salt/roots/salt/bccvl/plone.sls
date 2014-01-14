@@ -149,3 +149,28 @@ BCCVL Buildout:
       - cmd: BCCVL Buildout
     - watch_in:
       - service: supervisord
+
+/etc/varnish/bccvl.vcl:
+  file.managed:
+    - source: salt://bccvl/bccvl.vcl
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
+    - require:
+      - pkg: varnish
+    - watch_in:
+      - service: varnish
+
+/etc/sysconfig/varnish:
+  augeas.setvalue:
+    - prefix: /files/etc/sysconfig/varnish
+    - changes:
+      - VARNISH_LISTEN_ADDRESS: {{ pillars['plone']['cache']['host'] }}
+      - VARNISH_LISTEN_PORT: {{ pillars['plone']['cache']['port'] }}
+      - VARNISH_VCL_CONF: /etc/varnish/bccvl.vcl
+    - require:
+      - pkg: varnish
+      - file: /etc/varnish/bccvl.vcl
+    - watch_in:
+      - service: varnish
