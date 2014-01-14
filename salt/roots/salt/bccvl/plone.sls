@@ -137,8 +137,12 @@ BCCVL Buildout:
       - user: plone
 
 /etc/supervisord.d/bccvl.ini:
-  file.symlink:
-    - target: /home/plone/bccvl_buildout/parts/supervisor/supervisord.conf
+  file.managed:
+    - source: salt://bccvl/plone_supervisor.ini
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
     - require:
       - pkg: supervisor
     - watch:
