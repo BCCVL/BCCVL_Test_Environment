@@ -10,8 +10,8 @@
 
 
 backend default {
-    .host = "{{ pillars['plone']['balancer']['host'] }}";
-    .port = "{{ pillars['plone']['balancer']['port'] }}";
+    .host = "{{ pillar['plone']['balancer']['host'] }}";
+    .port = "{{ pillar['plone']['balancer']['port'] }}";
     .connect_timeout = 0.4s;
     .first_byte_timeout = 300s;
     .between_bytes_timeout = 60s;
