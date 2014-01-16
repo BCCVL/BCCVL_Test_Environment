@@ -137,11 +137,52 @@ BCCVL Buildout:
       - user: plone
 
 /etc/supervisord.d/bccvl.ini:
-  file.symlink:
-    - target: /home/plone/bccvl_buildout/parts/supervisor/supervisord.conf
+  file.managed:
+    - source: salt://bccvl/plone_supervisor.ini
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
     - require:
       - pkg: supervisor
     - watch:
       - cmd: BCCVL Buildout
     - watch_in:
       - service: supervisord
+
+/etc/varnish/bccvl.vcl:
+  file.managed:
+    - source: salt://bccvl/bccvl.vcl
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
+    - require:
+      - pkg: varnish
+    - watch_in:
+      - service: varnish
+
+/etc/sysconfig/varnish:
+  file.managed:
+    - source: salt://bccvl/varnish.sysconfig
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
+    - require:
+      - pkg: varnish
+      - file: /etc/varnish/bccvl.vcl
+    - watch_in:
+      - service: varnish
+
+/etc/haproxy/haproxy.cfg:
+  file.managed:
+    - source: salt://bccvl/haproxy.cfg
+    - user: root
+    - group: root
+    - mode: 640
+    - template: jinja
+    - requires:
+      - pkg: haproxy
+    - watch_in:
+      - service: haproxy

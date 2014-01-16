@@ -37,6 +37,9 @@ plone:
 
     siteid: bccvl
 
+    compute_host: 130.102.155.47
+    compute_user: bccvl
+
     # TODO: buildout template needs to support  parts
     instances:
         instance1:
@@ -82,6 +85,7 @@ plone:
     cache:
         host: 127.0.0.1
         port: 8101
+
     moai:
         host: 127.0.0.1
         port: 8180

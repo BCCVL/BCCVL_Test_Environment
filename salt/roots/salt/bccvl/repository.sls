@@ -8,3 +8,5 @@ include:
   - bccvl.supervisord
   - bccvl.shibd
   - bccvl.plone
+  - bccvl.varnish
+  - bccvl.haproxy
