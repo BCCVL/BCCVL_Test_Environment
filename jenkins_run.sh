@@ -11,6 +11,11 @@ vagrant up nectar_bccvl_combined --provider=openstack
 VAGRANT_RESULT=$?
 echo "VAGRANT_RESULT = $VAGRANT_RESULT"
 
+if [ $VAGRANT_RESULT -ne 0 ]
+	echo "Vagrant failure"
+	exit -1
+fi
+
 echo "Sleeping for 30 seconds"
 sleep 30
 
