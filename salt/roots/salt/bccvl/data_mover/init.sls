@@ -73,7 +73,7 @@ Data Mover Clone:
       - user: data_mover
       - pkg: Data Mover Requirements
 
-/home/data_mover/bccvl_data_mover/data_mover/data_mover/destination_config.json
+/home/data_mover/bccvl_data_mover/data_mover/data_mover/destination_config.json:
   file.managed:
     - source:
       - salt://bccvl/datamover_destination_config.json
