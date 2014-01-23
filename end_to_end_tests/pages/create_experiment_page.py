@@ -40,24 +40,32 @@ class CreateExperimentPage(BasePage):
         path_string = "(//input[@data-friendlyname='checkbox_algorithm_" + string + "'])"
         self.driver.find_element_by_xpath(path_string).click()
 
+    def select_occurrences_dataset(self, string):
+        path_string = "(//input[@data-friendlyname='radio_occurrence_" + string + "'])"
+        self.driver.find_element_by_xpath(path_string).click()
 
-    def select_occurrences_data_for_abt(self):
-        self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-0").click()
+    # def select_occurrences_data_for_abt(self):
+    #     self.driver.find_element_by_xpath("(//tr[@data-friendlyname='radio_occurrence_ABT occurrence data'])")
+    #
+    # def select_occurrences_data_for_dingo(self):
+    #     self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-1").click()
+    #
+    # def select_occurrences_data_for_koala(self):
+    #     self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-2").click()
 
-    def select_occurrences_data_for_dingo(self):
-        self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-1").click()
+    def select_absences_dataset(self, string):
+        path_string = "(//input[@data-friendlyname='radio_absence_" + string + "'])"
+        self.driver.find_element_by_xpath(path_string).click()
 
-    def select_occurrences_data_for_koala(self):
-        self.driver.find_element_by_id("form-widgets-species_occurrence_dataset-2").click()
 
-    def select_absences_data_for_abt(self):
-        self.driver.find_element_by_id("form-widgets-species_absence_dataset-0").click()
-
-    def select_absences_data_for_dingo(self):
-        self.driver.find_element_by_id("form-widgets-species_absence_dataset-1").click()
-
-    def select_absences_data_for_koala(self):
-        self.driver.find_element_by_id("form-widgets-species_absence_dataset-2").click()
+    # def select_absences_data_for_abt(self):
+    #     self.driver.find_element_by_id("form-widgets-species_absence_dataset-0").click()
+    #
+    # def select_absences_data_for_dingo(self):
+    #     self.driver.find_element_by_id("form-widgets-species_absence_dataset-1").click()
+    #
+    # def select_absences_data_for_koala(self):
+    #     self.driver.find_element_by_id("form-widgets-species_absence_dataset-2").click()
 
     def select_current_climate_layers(self, string):
         path_string = "(//tr[@data-friendlyname='collapsable_climatelayer_" + string + "'])"

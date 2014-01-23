@@ -22,3 +22,6 @@ class DatasetHomepage(BasePage):
     def check_species_selection(self, text):
         path_name = "//*[contains(.,'" + text + "')]"
         self.driver.find_element_by_xpath(path_name)
+
+    def select_find_occurrences(self):
+        self.driver.find_element_by_xpath("//a[@href='#tab-find']").click()
