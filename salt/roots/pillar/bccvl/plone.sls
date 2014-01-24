@@ -37,8 +37,8 @@ plone:
 
     siteid: bccvl
 
-    compute_host: 130.102.155.47
-    compute_user: bccvl
+    compute_host: 127.0.0.1
+    compute_user: plone
 
     # TODO: buildout template needs to support  parts
     instances:

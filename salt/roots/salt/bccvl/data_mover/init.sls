@@ -73,6 +73,15 @@ Data Mover Clone:
       - user: data_mover
       - pkg: Data Mover Requirements
 
+/home/data_mover/bccvl_data_mover/data_mover/data_mover/destination_config.json:
+  file.managed:
+    - source:
+      - salt://bccvl/datamover_destination_config.json
+    - template: jinja
+    - user: data_mover
+    - group: data_mover
+    - mode: 644
+
 Data Mover Get Virtual Env:
   cmd.run:
     - name: wget https://pypi.python.org/packages/source/v/virtualenv/virtualenv-{{ pillar['virtualenv']['version'] }}.tar.gz {{ pillar['python']['wget_flags'] }}
