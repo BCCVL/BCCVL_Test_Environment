@@ -11,7 +11,7 @@ vagrant up nectar_bccvl_combined --provider=openstack
 VAGRANT_RESULT=$?
 echo "VAGRANT_RESULT = $VAGRANT_RESULT"
 
-if [ $VAGRANT_RESULT -ne 0 ]
+if [ $VAGRANT_RESULT -ne 0 ]; then
 	echo "Vagrant failure"
 	exit -1
 fi
