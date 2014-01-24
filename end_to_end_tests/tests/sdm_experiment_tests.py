@@ -48,9 +48,10 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_submit_invalid_experiment()
         self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
         create_experiment_page.check_text_displayed("Please supply a descriptive name for this experiment.")
-        create_experiment_page.check_description_tab_displayed()
+        create_experiment_page.check_tab_displayed("Description")
         create_experiment_page.check_experiment_name_textbox()
         create_experiment_page.check_experiment_description_textbox()
+
 
     def test_sdm_experiment_ensure_experiment_name_cannot_begin_wtih_underscore_BCCVL302_Bug(self):
 
@@ -67,9 +68,86 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_submit_invalid_experiment()
         self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
         create_experiment_page.check_text_displayed("This value seems to be invalid.")
-        create_experiment_page.check_description_tab_displayed()
+        create_experiment_page.check_tab_displayed("Description")
         create_experiment_page.check_experiment_name_textbox()
         create_experiment_page.check_experiment_description_textbox()
+
+    def test_sdm_experiment_ensure_one_algorithm_need_to_be_selected(self):
+
+        plone_homepage = PloneHomepage(self.driver)
+        self.assertEqual(u'BCCVL Dashboard', plone_homepage.title)
+        bccvl_homepage = plone_homepage.valid_login('admin', 'admin')
+        self.assertEqual("BCCVL Dashboard", bccvl_homepage.title)
+        experiment_homepage = bccvl_homepage.click_experiments()
+        self.assertEqual("BCCVL Experiment List", experiment_homepage.title)
+        create_experiment_page = experiment_homepage.click_new_sdm_experiment()
+        self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
+        create_experiment_page.enter_experiment_name("ensure_one_algorithm_need_to_be_selected")
+        create_experiment_page.select_run()
+        create_experiment_page.select_submit_invalid_experiment()
+        create_experiment_page.check_tab_displayed("Configuration")
+        create_experiment_page.check_text_displayed("Please select at least 1 algorithm.")
+
+
+    def test_sdm_experiment_ensure_one_set_of_occurrences_need_to_be_selected(self):
+
+        plone_homepage = PloneHomepage(self.driver)
+        self.assertEqual(u'BCCVL Dashboard', plone_homepage.title)
+        bccvl_homepage = plone_homepage.valid_login('admin', 'admin')
+        self.assertEqual("BCCVL Dashboard", bccvl_homepage.title)
+        experiment_homepage = bccvl_homepage.click_experiments()
+        self.assertEqual("BCCVL Experiment List", experiment_homepage.title)
+        create_experiment_page = experiment_homepage.click_new_sdm_experiment()
+        self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
+        create_experiment_page.enter_experiment_name("ensure_one_set_of_occurrences_need_to_be_selected")
+        create_experiment_page.select_configuration()
+        create_experiment_page.select_sdm_algorithm("Bioclim")
+        create_experiment_page.select_run()
+        create_experiment_page.select_submit_invalid_experiment()
+        create_experiment_page.check_tab_displayed("Occurrences")
+        create_experiment_page.check_text_displayed("Please choose a set of occurrences.")
+
+    def test_sdm_experiment_ensure_one_set_of_absence_points_need_to_be_selected(self):
+
+        plone_homepage = PloneHomepage(self.driver)
+        self.assertEqual(u'BCCVL Dashboard', plone_homepage.title)
+        bccvl_homepage = plone_homepage.valid_login('admin', 'admin')
+        self.assertEqual("BCCVL Dashboard", bccvl_homepage.title)
+        experiment_homepage = bccvl_homepage.click_experiments()
+        self.assertEqual("BCCVL Experiment List", experiment_homepage.title)
+        create_experiment_page = experiment_homepage.click_new_sdm_experiment()
+        self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
+        create_experiment_page.enter_experiment_name("ensure_one_set_of_absence_points_need_to_be_selected")
+        create_experiment_page.select_configuration()
+        create_experiment_page.select_sdm_algorithm("Bioclim")
+        create_experiment_page.select_occurrences()
+        create_experiment_page.select_occurrences_dataset("ABT occurrence data")
+        create_experiment_page.select_run()
+        create_experiment_page.select_submit_invalid_experiment()
+        create_experiment_page.check_tab_displayed("Absences")
+        create_experiment_page.check_text_displayed("Please choose a set of absence points.")
+
+    def test_sdm_experiment_ensure_at_least_two_environmental_layers_are_selected(self):
+
+        plone_homepage = PloneHomepage(self.driver)
+        self.assertEqual(u'BCCVL Dashboard', plone_homepage.title)
+        bccvl_homepage = plone_homepage.valid_login('admin', 'admin')
+        self.assertEqual("BCCVL Dashboard", bccvl_homepage.title)
+        experiment_homepage = bccvl_homepage.click_experiments()
+        self.assertEqual("BCCVL Experiment List", experiment_homepage.title)
+        create_experiment_page = experiment_homepage.click_new_sdm_experiment()
+        self.assertEqual("BCCVL New SDM Experiment", create_experiment_page.title)
+        create_experiment_page.enter_experiment_name("ensure_one_set_of_absence_points_need_to_be_selected")
+        create_experiment_page.select_configuration()
+        create_experiment_page.select_sdm_algorithm("Bioclim")
+        create_experiment_page.select_occurrences()
+        create_experiment_page.select_occurrences_dataset("ABT occurrence data")
+        create_experiment_page.select_absences()
+        create_experiment_page.select_absences_dataset("ABT absence data")
+        create_experiment_page.select_run()
+        create_experiment_page.select_submit_invalid_experiment()
+        create_experiment_page.check_tab_displayed("Environment")
+        create_experiment_page.check_text_displayed("Please select at least 2 environmental layers.")
 
     def test_create_bioclim_experiment(self):
 
