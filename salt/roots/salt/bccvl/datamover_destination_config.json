@@ -22,11 +22,11 @@
         },
         "compute": {
             "description": "The compute engine",
-            "ip-address": "127.0.0.1",
+            "ip-address": "{{ pillar['plone']['compute_host'] }}",
             "protocol": "scp",
             "authentication": {
                 "key-based": {
-                    "username": "plone"
+                    "username": "{{ pillar['plone']['compute_user'] }}"
                 }
             }
         }
