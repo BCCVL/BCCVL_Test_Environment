@@ -128,3 +128,5 @@ class CreateExperimentPage(BasePage):
     def enter_brt_config_tolerance_value(self, value):
         self.driver.find_element_by_name("form.widgets.parameters_brt.widgets.tolerance_value").clear()
         self.driver.find_element_by_name("form.widgets.parameters_brt.widgets.tolerance_value").send_keys(value)
+
+

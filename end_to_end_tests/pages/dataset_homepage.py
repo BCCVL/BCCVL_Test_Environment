@@ -25,3 +25,26 @@ class DatasetHomepage(BasePage):
 
     def select_find_occurrences(self):
         self.driver.find_element_by_xpath("//a[@href='#tab-find']").click()
+
+    def upload_new_dataset(self):
+        self.driver.find_element_by_link_text("Upload New Dataset").click()
+
+    def upload_data_file(self, path):
+        self.driver.find_element_by_xpath("//input[@name='form.widgets.file']").send_keys(path)
+
+    def select_dataset_type_special_occurrence(self):
+        self.driver.find_element_by_xpath("//option[@id='form-widgets-http___namespaces_bccvl_org_au_prop_datagenre-6']").click()
+
+    def enter_dataset_title(self, title):
+        self.driver.find_element_by_name("form.widgets.IDublinCore.title").clear()
+        self.driver.find_element_by_name("form.widgets.IDublinCore.title").send_keys(title)
+
+    def enter_dataset_description(self, description):
+        self.driver.find_element_by_name("form.widgets.IDublinCore.description").clear()
+        self.driver.find_element_by_name("form.widgets.IDublinCore.description").send_keys(description)
+
+    def select_upload_dataset(self):
+        self.driver.find_element_by_name("form.buttons.save").click()
+
+    def select_my_dataset(self):
+        self.driver.find_element_by_link_text("My Datasets").click()
