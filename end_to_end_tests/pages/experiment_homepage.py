@@ -1,6 +1,8 @@
+import os
 from base_page import BasePage
 from create_experiment_page import CreateExperimentPage
 from view_experiment_page import ViewExperimentPage
+
 
 
 class ExperimentHomepage(BasePage):
@@ -11,6 +13,6 @@ class ExperimentHomepage(BasePage):
         return create_experiment_page
 
     def click_existing_experiment(self, path):
-        self.driver.find_element_by_xpath("//a[@href='http://bccvl-qa.intersect.org.au/experiments/"+ path + "']").click()
+        self.driver.find_element_by_xpath("//a[@href='" + os.environ['URL'] +"/experiments/"+ path + "']").click()
         view_experiment_page = ViewExperimentPage(self.driver)
         return view_experiment_page
