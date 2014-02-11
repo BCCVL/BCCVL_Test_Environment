@@ -16,8 +16,13 @@ class SDMExperimentTests(unittest.TestCase):
 
     def setUp(self):
 
+        try:
+            url = os.environ['URL']
+        except KeyError:
+            raise
         self.display = Display(visible=0, size=(1920, 1080))
         self.display.start()
+
 
         fp = webdriver.FirefoxProfile()
         # global temp_dir
@@ -30,7 +35,7 @@ class SDMExperimentTests(unittest.TestCase):
         fp.set_preference("browser.helperApps.neverAsk.openFile", "image/png, text/html, image/tiff, text/csv, text/plain, application/octet-stream, application/zip")
         fp.set_preference("browser.helperApps.neverAsk.saveToDisk",  "image/png, text/html, image/tiff, text/csv, text/plain, application/octet-stream, application/zip")
         self.driver = webdriver.Firefox(firefox_profile=fp)
-        self.driver.get(os.environ['URL'])
+        self.driver.get(url)
         self.driver.maximize_window()
         self.driver.implicitly_wait(10)
 
@@ -205,7 +210,7 @@ class SDMExperimentTests(unittest.TestCase):
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
         view_experiment_page.check_text_displayed("ABT bioclim model and evaluation")
-        view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+        view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
         # view_experiment_page.select_results()
         # view_experiment_page.check_text_displayed("bioclim_06_response.png")
@@ -268,7 +273,7 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_run()
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-        view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+        view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
         # view_experiment_page.select_results()
         # view_experiment_page.check_text_displayed("bioclim_01_response.png")
@@ -336,7 +341,7 @@ class SDMExperimentTests(unittest.TestCase):
     #     create_experiment_page.select_run()
     #     view_experiment_page = create_experiment_page.select_review_start_experiment()
     #     self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-    #     view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+    #     view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
     #     view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
     #     # view_experiment_page.select_results()
     #      # in progress - awaiting reuslts
@@ -396,7 +401,7 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_run()
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-        view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+        view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
         # view_experiment_page.select_results()
         # view_experiment_page.check_text_displayed("bioclim_01_response.png")
@@ -482,7 +487,7 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_run()
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-        view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+        view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
         # view_experiment_page.select_results()
         # view_experiment_page.check_text_displayed("bioclim_01_response.png")
@@ -557,7 +562,7 @@ class SDMExperimentTests(unittest.TestCase):
         create_experiment_page.select_run()
         view_experiment_page = create_experiment_page.select_review_start_experiment()
         self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-        view_experiment_page.wait_till_text_displayed("this Experiment is running", 240)
+        view_experiment_page.wait_till_text_displayed("This Experiment is running", 240)
         view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 840)
         # view_experiment_page.select_results()
         # view_experiment_page.check_text_displayed("bioclim_01_response.png")
@@ -737,8 +742,8 @@ class SDMExperimentTests(unittest.TestCase):
     #     create_experiment_page.select_run()
     #     view_experiment_page = create_experiment_page.select_review_start_experiment()
     #     self.assertEqual("BCCVL Experiment Results", view_experiment_page.title)
-    #     view_experiment_page.wait_till_text_displayed("this Experiment is running", 120)
-    #     view_experiment_page.wait_till_text_displayed("this Experiment is retrieving data", 840)
+    #     view_experiment_page.wait_till_text_displayed("This Experiment is running", 120)
+    #     view_experiment_page.wait_till_text_displayed("This Experiment is retrieving data", 840)
     #     view_experiment_page.wait_till_text_displayed("This Experiment is complete. The results are available below.", 600)
     #     view_experiment_page.select_details()
     #     view_experiment_page.check_text_displayed("Bioclim")

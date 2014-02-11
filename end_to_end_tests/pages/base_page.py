@@ -15,7 +15,6 @@ class BasePage():
         assert string in self.driver.find_element_by_tag_name("body").text
 
     def wait_till_text_displayed(self, string, seconds):
-
       try:
          print "about to look for element"
          element = WebDriverWait(self.driver, seconds).until(lambda s: self.check_text_exists(string))
