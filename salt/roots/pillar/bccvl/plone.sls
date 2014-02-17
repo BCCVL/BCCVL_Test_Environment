@@ -40,6 +40,10 @@ plone:
     compute_host: 127.0.0.1
     compute_user: plone
 
+    #
+    # storage:
+    #    root: ${buildout:directory}
+
     # TODO: buildout template needs to support  parts
     instances:
         instance1:

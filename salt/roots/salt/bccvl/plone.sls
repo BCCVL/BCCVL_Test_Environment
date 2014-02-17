@@ -103,6 +103,18 @@ BCCVL Buildout Config:
     - require:
       - git: BCCVL Buildout Clone
 
+# create storage if necessary
+{% if pillar['plone'].get('storage', false) %}
+pillar['plone']['storage']['root']:
+  file.directory:
+    - user: plone
+    - group: plone
+    - mode: 750
+    - makedirs: True
+    - require_in:
+        - cmd: BCCVL Bootstrap Buildout
+{% endif %}
+
 BCCVL Bootstrap Buildout:
   cmd.run:
     - cwd: /home/plone/bccvl_buildout
