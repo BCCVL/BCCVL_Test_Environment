@@ -105,7 +105,7 @@ BCCVL Buildout Config:
 
 # create storage if necessary
 {% if pillar['plone'].get('storage', false) %}
-pillar['plone']['storage']['root']:
+{{ pillar['plone']['storage']['root'] }}:
   file.directory:
     - user: plone
     - group: plone
