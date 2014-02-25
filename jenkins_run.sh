@@ -29,8 +29,8 @@ sleep 5m
 # Seed instance
 vagrant ssh nectar_bccvl_combined -c 'sudo su plone -c "cd ~/bccvl_buildout; ./bin/instance-debug run src/org.bccvl.testsetup/src/org/bccvl/testsetup/main.py"'
 
-echo "Sleeping for 1 minute"
-sleep 1m
+echo "Sleeping for 5 minutes"
+sleep 5m
 
 # Run tests
 # Setup the Selenium tests
