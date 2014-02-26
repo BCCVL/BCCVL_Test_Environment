@@ -20,7 +20,7 @@ class SDMExperimentTests(unittest.TestCase):
             url = os.environ['URL']
         except KeyError:
             raise
-        self.display = Display(visible=0, size=(1920, 1080))
+        self.display = Display(visible=0, size=(3000, 2000))
         self.display.start()
 
 
