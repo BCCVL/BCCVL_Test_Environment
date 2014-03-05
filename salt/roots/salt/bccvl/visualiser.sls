@@ -86,6 +86,7 @@ visualiser:
 Visualiser Clone:
   git.latest:
     - name: https://github.com/BCCVL/BCCVL_Visualiser.git
+    - rev: qa
     - target: /home/visualiser/BCCVL_Visualiser
     - runas: visualiser
     - require:
@@ -174,7 +175,7 @@ Visualiser Buildout:
     - makedirs: True
     - require:
       - git: Visualiser Clone
-    - require_in: 
+    - require_in:
       - service: supervisord
 
 
