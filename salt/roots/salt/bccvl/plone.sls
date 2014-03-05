@@ -79,6 +79,7 @@ plone:
 BCCVL Buildout Clone:
   git.latest:
     - name: https://github.com/BCCVL/bccvl_buildout.git
+    - rev: master
     - target: /home/plone/bccvl_buildout
     - runas: plone
     - require:
