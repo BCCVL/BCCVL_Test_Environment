@@ -1,5 +1,5 @@
-from base_page import BasePage
-from view_experiment_page import ViewExperimentPage
+from pages.base_page import BasePage
+from pages.view_experiment_page import ViewExperimentPage
 
 
 class CreateExperimentPage(BasePage):

@@ -1,5 +1,5 @@
-from bccvl_homepage import BCCVLHomepage
-from base_page import BasePage
+from pages.bccvl_homepage import BCCVLHomepage
+from pages.base_page import BasePage
 
 class PloneHomepage(BasePage):
 
@@ -15,6 +15,7 @@ class PloneHomepage(BasePage):
         self.driver.implicitly_wait(5)
         self.driver.find_element_by_id("__ac_password").clear()
         self.driver.find_element_by_id("__ac_password").send_keys(password)
+        self.driver.find_element_by_id("legals-checkbox").click()
         self.driver.find_element_by_name("submit").click()
         self.driver.implicitly_wait(100)
         bccvl_homepage = BCCVLHomepage(self.driver)

@@ -1,5 +1,5 @@
-from base_page import BasePage
-from dataset_homepage import DatasetHomepage
+from pages.base_page import BasePage
+from pages.dataset_homepage import DatasetHomepage
 
 
 class DataHomepage(BasePage):

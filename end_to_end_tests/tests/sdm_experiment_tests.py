@@ -1,13 +1,10 @@
 import unittest
+import sys
+
 from pyvirtualdisplay import Display
 from selenium import webdriver
-from selenium.webdriver.support.ui import WebDriverWait
-import tempfile
 import os
-import time
-import sys
-import hashlib
-from end_to_end_tests.pages.plone_homepage import PloneHomepage
+from pages.plone_homepage import PloneHomepage
 
 
 class SDMExperimentTests(unittest.TestCase):
