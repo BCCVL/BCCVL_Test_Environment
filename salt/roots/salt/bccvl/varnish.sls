@@ -1,7 +1,7 @@
 varnish:
   pkg.installed:
     - require:
-      - pkg: Install Epel Repository
+      - pkg: Install Varnish Repository
   service:
     - running
     - enable: True

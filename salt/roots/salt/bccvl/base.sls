@@ -25,6 +25,11 @@ Install Elgis Repository:
     - sources:
       - elgis-release: http://elgis.argeo.org/repos/6/elgis-release-6-6_0.noarch.rpm
 
+Install Varnish Repository:
+  pkg.installed:
+    - sources:
+      - varnish-release: http://repo.varnish-cache.org/redhat/varnish-3.0/el6/noarch/varnish-release/varnish-release-3.0-1.el6.noarch.rpm
+
 ElGIS Packages:
   pkg.installed:
     - pkgs:

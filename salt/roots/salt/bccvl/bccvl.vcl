@@ -30,7 +30,7 @@ sub vcl_recv {
         if (!client.ip ~ purge) {
                 error 405 "Not allowed.";
         }
-        purge_url(req.url);
+        ban_url(req.url);
         error 200 "Purged";
     }
     if (req.request == "POST") {
@@ -46,21 +46,21 @@ sub vcl_recv {
 }
 
 sub vcl_fetch {
-    if (!beresp.cacheable) {
+    if (beresp.ttl <= 0s) { # was !beresp.cacheable
         set beresp.http.X-Varnish-Action = "FETCH (pass - not cacheable)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (beresp.http.Set-Cookie) {
         set beresp.http.X-Varnish-Action = "FETCH (pass - response sets cookie)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (!beresp.http.Cache-Control ~ "s-maxage=[1-9]" && beresp.http.Cache-Control ~ "(private|no-cache|no-store)") {
         set beresp.http.X-Varnish-Action = "FETCH (pass - response sets private/no-cache/no-store token)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (req.http.Authorization && !beresp.http.Cache-Control ~ "public") {
         set beresp.http.X-Varnish-Action = "FETCH (pass - authorized and no public cache control)";
-        return(pass);
+        return(hit_for_pass);
     }
     if (req.http.X-Anonymous && !beresp.http.Cache-Control) {
         set beresp.ttl = 600s;
@@ -99,7 +99,7 @@ sub normalize_accept_encoding {
 
 # Keep auth/anon variants apart if "Vary: X-Anonymous" is in the response
 sub annotate_request {
-    if (!(req.http.Authorization || req.http.cookie ~ "(^|.*; )__ac=" || req.http.cookie ~ "(^|.*; )_shibsession_.*=")) {
+    if (!(req.http.Authorization || req.http.cookie ~ "(^|.*; )__ac=" || req.http.X_REMOTE_USER != "(null)")) {
         set req.http.X-Anonymous = "True";
     }
 }
