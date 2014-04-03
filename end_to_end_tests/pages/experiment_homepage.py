@@ -1,7 +1,7 @@
 import os
-from base_page import BasePage
-from create_experiment_page import CreateExperimentPage
-from view_experiment_page import ViewExperimentPage
+from pages.base_page import BasePage
+from pages.create_experiment_page import CreateExperimentPage
+from pages.view_experiment_page import ViewExperimentPage
 
 
 

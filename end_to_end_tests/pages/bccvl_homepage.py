@@ -1,6 +1,6 @@
-from base_page import BasePage
-from experiment_homepage import ExperimentHomepage
-from data_homepage import DataHomepage
+from pages.base_page import BasePage
+from pages.experiment_homepage import ExperimentHomepage
+from pages.data_homepage import DataHomepage
 
 class BCCVLHomepage(BasePage):
 
