@@ -41,7 +41,7 @@ Bring up the combined VM on NeCTAR
 
 See this page on how to configure your credentials in the Vagrant File:
 
-    [https://bitbucket.org/stevecassidy/vagrant-nectar-cloud](https://bitbucket.org/stevecassidy/vagrant-nectar-cloud)
+[https://bitbucket.org/stevecassidy/vagrant-nectar-cloud](https://bitbucket.org/stevecassidy/vagrant-nectar-cloud)
 
 Bring up the VM:
 
