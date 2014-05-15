@@ -14,23 +14,23 @@ This guide assumes you just freshly cloned this repo.
 Linux / Mac instructions
 -----------------------------
 
+1. Install VirtualBox for your system:
+
+    [https://www.virtualbox.org/](https://www.virtualbox.org/)
+
 1. Install vagrant guest additions plugin. This ensures that your VMs
 guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
-		vagrant plugin install vagrant-vbguest
+        vagrant plugin install vagrant-vbguest
 
-2. Install salty-vagrant plugin. (Unless already installed)
-
-		vagrant plugin install vagrant-salt
-
-3. Install the openstack-vagrant plugin to support running on NeCTAR
+2. Optionall install the openstack-vagrant plugin to support running on NeCTAR
 
         vagrant plugin install vagrant-openstack-plugin
 
-4. Bring up the combined VM:
+3. Bring up the combined VM:
 
-		vagrant up combined
+        vagrant up combined
 
 Once this is done, you will need to manually seed the plone site.
 
@@ -41,7 +41,7 @@ Bring up the combined VM on NeCTAR
 
 See this page on how to configure your credentials in the Vagrant File:
 
-        https://bitbucket.org/stevecassidy/vagrant-nectar-cloud
+    [https://bitbucket.org/stevecassidy/vagrant-nectar-cloud](https://bitbucket.org/stevecassidy/vagrant-nectar-cloud)
 
 Bring up the VM:
 
@@ -55,51 +55,51 @@ Windows instructions - Option 1 - Should always work
 guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
-		vagrant plugin install vagrant-vbguest
+        vagrant plugin install vagrant-vbguest
 
 2. Install salty-vagrant plugin. (Unless already installed)
 
-		vagrant plugin install vagrant-salt
+        vagrant plugin install vagrant-salt
 
 3. Bring up the combined VM. You might get an error saying you tried
 to interact with a machine that was not ready for guest interactions. Ignore
 this error.
 
-		vagrant up combined
+        vagrant up combined
 
 4. SSH into the VM:
 
-		vagrant ssh combined
+        vagrant ssh combined
 
 5. Install git onto the VM::
 
-		sudo yum install git
+        sudo yum install git
 
 6. Install Salt onto the VM:
 
-		curl -L http://bootstrap.saltstack.org | sudo sh -s -- git v0.16.0
+        curl -L http://bootstrap.saltstack.org | sudo sh -s -- git v0.16.0
 
 7. Clone this repo onto the VM:
 
-		cd ~ && git clone https://github.com/BCCVL/BCCVL_Test_Environment.git
+        cd ~ && git clone https://github.com/BCCVL/BCCVL_Test_Environment.git
 
 8. Put the salt files in the right spot:
 
-		sudo rm -rf /srv /etc/salt/minion &&
-		sudo ln -s ~/BCCVL_Test_Environment/salt/combined_minion  /etc/salt/minion &&
-		sudo ln -s ~/BCCVL_Test_Environment/salt/roots/ /srv
+        sudo rm -rf /srv /etc/salt/minion &&
+        sudo ln -s ~/BCCVL_Test_Environment/salt/combined_minion  /etc/salt/minion &&
+        sudo ln -s ~/BCCVL_Test_Environment/salt/roots/ /srv
 
 9. Provision with salt:
 
-		sudo salt-call state.highstate
+        sudo salt-call state.highstate
 
 Note you may see some errors when provisioning, if this happens, you need to halt the VM, restart the VM, and re-provision.
 **Only do this if necessary** (exit out of the VM prior to running these commands):
 
-		vagrant halt combined &&
-		vagrant up combined &&
-		vagrant ssh combined &&
-		sudo salt-call state.highstate		
+    vagrant halt combined &&
+    vagrant up combined &&
+    vagrant ssh combined &&
+    sudo salt-call state.highstate
 
 Once this is done, you will need to manually seed the plone site.
 
@@ -112,21 +112,21 @@ Windows instructions - Option 2 - Easier, but may not work
 guest additions are up to date - if you don't use this, you'll
 need to manage the guest additions on your VMs yourself.
 
-		C:\...\vagrant\embedded\bin\gem.bat install vagrant-vbguest
-		# Where C:\...\ is the path to your programs folder (or wherever you installed it to)
+        C:\...\vagrant\embedded\bin\gem.bat install vagrant-vbguest
+        # Where C:\...\ is the path to your programs folder (or wherever you installed it to)
 
 2. Install salty-vagrant plugin.
 
-		C:\...\vagrant\embedded\bin\gem.bat install vagrant-salt
-		# Where C:\...\ is the path to your programs folder (or wherever you installed it to)
+        C:\...\vagrant\embedded\bin\gem.bat install vagrant-salt
+        # Where C:\...\ is the path to your programs folder (or wherever you installed it to)
 
 3. Bring up the combined VM:
 
-		vagrant up combined
+        vagrant up combined
 
 4. Provision the combined VM:
 
-		vagrant provision combined
+        vagrant provision combined
 
 Once this is done, you will need to manually seed the plone site.
 
@@ -143,11 +143,11 @@ This will update your VM, in most cases, this is all you should need to do.
 
 1. Update this repo
 
-		git pull
+                git pull
 
 2. Re-provision
 
-		vagrant up combined && vagrant provision combined
+                vagrant up combined && vagrant provision combined
 
 **From Scratch**:
 
@@ -155,15 +155,15 @@ If you have problems with the Incremental update, you can always do a clean inst
 
 1. Update this repo
 
-		git pull
+                git pull
 
 2. Destroy the VM
 
-		vagrant destroy combined
+                vagrant destroy combined
 
 3. Bring up a new VM
 
-		vagrant up combined
+                vagrant up combined
 
 VMs
 ------------------
@@ -179,6 +179,7 @@ requirements, just use the combined VM.
 | Combined      | combined         | 192.168.100.200 | N/A                                               |
 
 
+
 Testing Plone
 ==========================
 
@@ -191,7 +192,7 @@ will start up relatively quickly, and then you will receive a
 Once provisioning is successfully completed and the VM has started all necessary
 services, the VM will allow for interaction with a production instance environment at:
 
-		https://192.168.100.200/
+    https://192.168.100.200/
 
 Once this URL responds with a Plone interface that has reference data sets, experiments, etc.
 you can be confident that your plone VM is ready, all the necessary services are running.
@@ -210,19 +211,19 @@ the necessary services running when you try start your development instance.
 
 1. Log into the Plone VM:
 
-		vagrant ssh combined
+        vagrant ssh combined
 
 2. Switch to the plone user:
 
-		sudo su plone
+        sudo su plone
 
 3. Start Plone:
 
-		cd ~/bccvl_buildout && ./bin/instance-debug fg
+        cd ~/bccvl_buildout && ./bin/instance-debug fg
 
 4. Hit the development instance of plone in your browser (this can be from your local _host_ machine):
 
-		https://192.168.100.200/_debug/bccvl
+        https://192.168.100.200/_debug/bccvl
 
 
 Testing The Visualiser
@@ -232,7 +233,7 @@ Note: This assumes you have finished the getting started steps, your VM is up, a
 
 1. Hit the visualiser in your browser (this can be from your local _host_ machine):
 
-		http://192.168.100.200/_visualiser/api.text
+        http://192.168.100.200/_visualiser/api.text
 
 Once this URL responds with a listing of the available visualiser apis, you can be
 confident that the visualiser is started.
@@ -244,19 +245,19 @@ Note: This assumes you have finished the getting started steps, your VM is up, a
 
 1. start an interactive python prompt
 
-		python
+        python
 
 2. run the following python
 
-		from xmlrpclib import ServerProxy
-		s = ServerProxy('http://192.168.100.200/_data_mover/data_mover')
-		lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
-		lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
-		s.pullOccurrenceFromALA(lsid)
+        from xmlrpclib import ServerProxy
+        s = ServerProxy('http://192.168.100.200/_data_mover/data_mover')
+        lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
+        lsid = 'urn:lsid:biodiversity.org.au:afd.taxon:31a9b8b8-4e8f-4343-a15f-2ed24e0bf1ae'
+        s.pullOccurrenceFromALA(lsid)
 
 You can be confident the data_mover is up if you receive something like the following:
 
-		{'status': 'PENDING', 'id': 1}
+    {'status': 'PENDING', 'id': 1}
 
 
 
@@ -293,10 +294,11 @@ Deploying with salt-master and salt-minion on same machine
       demo:
         - /srv/pillar/dem
     ```
+
 4. Make sure the minion will look for the master on localhost
 
-   add an entry like ```127.0.0.1 salt``` into /etc/hosts or change
-   the salt-minion configuration.
+    add an entry like ```127.0.0.1 salt``` into /etc/hosts or change
+    the salt-minion configuration.
 
 5. setup salt directory structure and clone BCCVL_Test_Environment
 
@@ -311,7 +313,7 @@ Deploying with salt-master and salt-minion on same machine
 
 6. configure top.sls and pillars
 
-    /srv/salt/top.sls
+        /srv/salt/top.sls
     ```yaml
     demo:
       'hostname':
@@ -322,7 +324,7 @@ Deploying with salt-master and salt-minion on same machine
     cp -r /srv/BCCVL_Test_Environment/salt/roots/pillar/bccvl /srv/pillar/demo/
     ```
 
-    /srv/pillar/top.sls
+        /srv/pillar/top.sls
     ```yaml
     demo:
       'hostname':
