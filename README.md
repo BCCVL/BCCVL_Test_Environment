@@ -9,7 +9,9 @@ Getting Started
 
 Welcome... Let's get straight into it.
 
-This guide assumes you just freshly cloned this repo.
+This guide assumes you just freshly cloned this repo and made sure you
+checked out the proper branch. E.g. to get the latest development
+version us the branch develop.
 
 Linux / Mac instructions
 -----------------------------
